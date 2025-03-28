@@ -3,20 +3,25 @@ using UnityEngine;
 
 public class GrapplingHook : MonoBehaviour
 {
+    //Possible UI sight here not sure if this will work, video said it should tho
     public GameObject sightUI;
+
+    // Line renderer and grappling stuff
     private LineRenderer lr;
     private Vector3 grapplePoint;
-    public LayerMask whatIsGrappleable;
-    public Transform gunTip, camera, player;
-    private float maxDistance = 100f;
-    private SpringJoint joint;
+    public LayerMask whatIsGrappleable; //Object needs this to have the grappling gun to stick to wherever it shoots
+    public Transform gunTip, camera, player; // guntip will be the gun tip of grappling gun
+
+    
+    private float maxDistance = 100f; //how far grapple can shot
+    private SpringJoint joint; //launch variable
     private Rigidbody rb;
-    public float stopDistance = 1f;
-    private Vector3 grappleDirection;
-    public float grappleSpeed = 10f;
-    private bool isGrappling = false;
-    public float pullForce = 10f;
-    private Vector3 currentGrapplePosition;
+    public float stopDistance = 1f; //how close player needs to be before stopping theg grappling function
+    private Vector3 grappleDirection; // where player is flying to
+    public float grappleSpeed = 10f; // how fast play is flying
+    private bool isGrappling = false; //boolean for function should also add a delay to stop player from spamming grappling gun
+    public float pullForce = 10f; // also affects the player reaching stopDistance
+    private Vector3 currentGrapplePosition; // where player is shot grappling gun.
 
     private void Start()
     {
