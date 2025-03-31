@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - grappleable
+  - Enemy
+  - StealableEnemy
   layers:
   - Default
   - TransparentFX
@@ -12,8 +14,8 @@ TagManager:
   - whatIsGrappleable
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 
