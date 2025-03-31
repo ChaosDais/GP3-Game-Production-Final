@@ -1,35 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+using TMPro;
 using UnityEngine;
 
 public class AbilitySteal : MonoBehaviour
 {
-    private Outline outline;
-
-    private void Start()
+    public TextMeshProUGUI abilityText;
+    public void GainAbility(string name)
     {
-        if(GetComponent<Outline>() != null)
-        {
-            outline = GetComponent<Outline>();
-            outline.enabled = false;
-        }
-        else
-            Debug.LogError("Attach the Outline script to this object!");
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (CompareTag("StealableEnemy") && other.CompareTag("Player"))
-        {
-            if (outline != null)
-                outline.enabled = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-            outline.enabled = false;
+        abilityText.text = name;
     }
 }
