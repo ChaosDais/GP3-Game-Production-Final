@@ -9,10 +9,12 @@ public class GrapplingHook : MonoBehaviour
     // Line renderer and grappling stuff
     private LineRenderer lr;
     private Vector3 grapplePoint;
+    private Transform grappledObject; // Reference to the object we're grappled to
+    private Vector3 grappleLocalPoint; // Local position on the grappled object
     public LayerMask whatIsGrappleable; //Object needs this to have the grappling gun to stick to wherever it shoots
     public Transform gunTip, camera, player; // guntip will be the gun tip of grappling gun
 
-    
+
     private float maxDistance = 100f; //how far grapple can shot
     private SpringJoint joint; //launch variable
     private Rigidbody rb;
@@ -56,6 +58,13 @@ public class GrapplingHook : MonoBehaviour
         if (IsGrappling())
         {
             PullPlayerTowardsGrapple();
+
+            // LEFTSHIFTCANCEL
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                Debug.Log("Grapple cancelled by player");
+                StopGrapple();
+            }
         }
 
         else if (Input.GetMouseButtonUp(0) && IsGrappling())
@@ -101,7 +110,11 @@ public class GrapplingHook : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(camera.position, camera.forward, out hit, maxDistance, whatIsGrappleable))
         {
+            grappledObject = hit.transform;
+            grappleLocalPoint = grappledObject.InverseTransformPoint(hit.point);
             grapplePoint = hit.point;
+            grappleDirection = (grapplePoint - player.position).normalized;
+
             joint = player.gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
             joint.connectedAnchor = grapplePoint;
@@ -125,6 +138,7 @@ public class GrapplingHook : MonoBehaviour
         Destroy(joint);
         isGrappling = false;
         lr.enabled = false;
+        grappledObject = null;
     }
 
     void DrawRope()
@@ -139,19 +153,18 @@ public class GrapplingHook : MonoBehaviour
     {
         if (joint == null) return;
 
-     
-        Vector3 directionToGrapple = (grapplePoint - player.position).normalized;
+       
+        if (grappledObject != null)
+        {
+            grapplePoint = grappledObject.TransformPoint(grappleLocalPoint);
+            joint.connectedAnchor = grapplePoint;
+        }
 
-      
-        Vector3 velocity = directionToGrapple * grappleSpeed;
-
-      
+    
+        Vector3 velocity = grappleDirection * grappleSpeed;
         rb.velocity = velocity;
 
-       
-        currentGrapplePosition = player.position + directionToGrapple * Vector3.Distance(player.position, grapplePoint);
-
-        Debug.Log("Lerping towards Grapple Point: " + player.position);
+        currentGrapplePosition = grapplePoint;
 
         if (Vector3.Distance(player.position, grapplePoint) < stopDistance)
         {
@@ -169,7 +182,7 @@ public class GrapplingHook : MonoBehaviour
     {
         return grapplePoint;
     }
-
+    
     private void ShowAimingUI()
     {
         if (sightUI != null)
