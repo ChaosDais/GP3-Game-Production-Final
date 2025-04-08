@@ -11,6 +11,8 @@ namespace Invector.vCharacterController
         public const float runningSpeed = 1f;
         public const float sprintSpeed = 1.5f;
 
+        [HideInInspector] public bool isAttacking = false;
+
         #endregion  
 
         public virtual void UpdateAnimator()
@@ -21,6 +23,7 @@ namespace Invector.vCharacterController
             animator.SetBool(vAnimatorParameters.IsSprinting, isSprinting);
             animator.SetBool(vAnimatorParameters.IsGrounded, isGrounded);
             animator.SetFloat(vAnimatorParameters.GroundDistance, groundDistance);
+            animator.SetBool(vAnimatorParameters.IsAttacking, isAttacking);
 
             if (isStrafing)
             {
@@ -59,5 +62,6 @@ namespace Invector.vCharacterController
         public static int IsStrafing = Animator.StringToHash("IsStrafing");
         public static int IsSprinting = Animator.StringToHash("IsSprinting");
         public static int GroundDistance = Animator.StringToHash("GroundDistance");
+        public static int IsAttacking = Animator.StringToHash("IsAttacking");
     }
 }

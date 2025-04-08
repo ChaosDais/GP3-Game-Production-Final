@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Invector.vCharacterController;
 using UnityEngine;
 
 public class Attack : MonoBehaviour
@@ -8,22 +9,24 @@ public class Attack : MonoBehaviour
     public int damage = 5;
     public bool playerSourced = false;
 
-    private Collider col;
+    Collider col;
+    vThirdPersonInput input;
 
     void Start()
     {
         col = GetComponent<BoxCollider>();
+        input = GameObject.FindWithTag("Player").GetComponent<vThirdPersonInput>();
     }
 
     void Update()
     {
         
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(input.attackInput))
         {
             Debug.Log("Attack!");
             col.enabled = true;
         }
-        else if (Input.GetKeyUp(KeyCode.Mouse0))
+        else if (Input.GetKeyUp(input.attackInput))
         {
             Debug.Log("Stopped attacking.");
             col.enabled = false;
