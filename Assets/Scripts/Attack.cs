@@ -8,11 +8,11 @@ public class Attack : MonoBehaviour
     public int damage = 5;
     public bool playerSourced = false;
 
-    private Collider collider;
+    private Collider col;
 
     void Start()
     {
-        collider = GetComponent<BoxCollider>();
+        col = GetComponent<BoxCollider>();
     }
 
     void Update()
@@ -21,12 +21,12 @@ public class Attack : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Debug.Log("Attack!");
-            collider.enabled = true;
+            col.enabled = true;
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             Debug.Log("Stopped attacking.");
-            collider.enabled = false;
+            col.enabled = false;
         }
         
     }
