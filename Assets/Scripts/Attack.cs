@@ -8,25 +8,27 @@ public class Attack : MonoBehaviour
     public int damage = 5;
     public bool playerSourced = false;
 
-    Animator anim;
+    private Collider collider;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
+        collider = GetComponent<BoxCollider>();
     }
 
     void Update()
     {
-        /*
+        
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            anim.SetBool("isAttacking", true);
+            Debug.Log("Attack!");
+            collider.enabled = true;
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            anim.SetBool("isAttacking", false);
+            Debug.Log("Stopped attacking.");
+            collider.enabled = false;
         }
-        */
+        
     }
 
     private void OnTriggerEnter(Collider other)
