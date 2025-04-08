@@ -22,10 +22,20 @@ namespace Invector.vCharacterController
         [HideInInspector] public vThirdPersonCamera tpCamera;
         [HideInInspector] public Camera cameraMain;
 
+        Attack sword;
+
         #endregion
 
         protected virtual void Start()
         {
+            if (GameObject.FindWithTag("Sword") != null)
+            {
+                sword = GameObject.FindWithTag("Sword").GetComponent<Attack>();
+                sword.col.enabled = false;
+            }
+            else
+                Debug.LogWarning("Tag the sword with 'Sword'!");
+
             InitilizeController();
             InitializeTpCamera();
         }
@@ -87,14 +97,18 @@ namespace Invector.vCharacterController
         {
             if (Input.GetKeyDown(attackInput))
             {
+                sword.col.enabled = true;
                 cc.isAttacking = true;
                 Debug.Log("Set isAttacking to " + cc.isAttacking);
+                Invoke(nameof(AttackEnd), 1.2f);
             }
-            else if (Input.GetKeyUp(attackInput))
-            {
-                cc.isAttacking = false;
-                Debug.Log("Set isAttacking to " + cc.isAttacking);
-            }
+        }
+
+        public virtual void AttackEnd()
+        {
+            sword.col.enabled = false;
+            cc.isAttacking = false;
+            Debug.Log("Animation ended. Set isAttacking to " + cc.isAttacking);
         }
 
         public virtual void MoveInput()

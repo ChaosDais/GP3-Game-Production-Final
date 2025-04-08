@@ -9,29 +9,13 @@ public class Attack : MonoBehaviour
     public int damage = 5;
     public bool playerSourced = false;
 
-    Collider col;
+    [HideInInspector] public Collider col;
     vThirdPersonInput input;
 
     void Start()
     {
         col = GetComponent<BoxCollider>();
         input = GameObject.FindWithTag("Player").GetComponent<vThirdPersonInput>();
-    }
-
-    void Update()
-    {
-        
-        if (Input.GetKeyDown(input.attackInput))
-        {
-            Debug.Log("Attack!");
-            col.enabled = true;
-        }
-        else if (Input.GetKeyUp(input.attackInput))
-        {
-            Debug.Log("Stopped attacking.");
-            col.enabled = false;
-        }
-        
     }
 
     private void OnTriggerEnter(Collider other)
