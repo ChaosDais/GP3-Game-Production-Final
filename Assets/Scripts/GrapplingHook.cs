@@ -153,23 +153,36 @@ public class GrapplingHook : MonoBehaviour
     {
         if (joint == null) return;
 
-       
         if (grappledObject != null)
         {
+            // Update grapple point position for moving objects
             grapplePoint = grappledObject.TransformPoint(grappleLocalPoint);
             joint.connectedAnchor = grapplePoint;
+
+            // Continuously update direction vector to follow moving target
+            grappleDirection = (grapplePoint - player.position).normalized;
         }
 
-    
-        Vector3 velocity = grappleDirection * grappleSpeed;
-        rb.velocity = velocity;
+        float distanceToTarget = Vector3.Distance(player.position, grapplePoint);
+
+        // Calculate speed multiplier - maintain full speed until very close to target
+        float speedMultiplier = 1f;
+        if (distanceToTarget < stopDistance * 2f)
+        {
+            speedMultiplier = Mathf.Lerp(0.5f, 1f, distanceToTarget / (stopDistance * 2f));
+        }
+
+        // Apply velocity directly towards target
+        Vector3 targetVelocity = grappleDirection * (grappleSpeed * speedMultiplier);
+        rb.velocity = targetVelocity;
 
         currentGrapplePosition = grapplePoint;
 
-        if (Vector3.Distance(player.position, grapplePoint) < stopDistance)
+        // Only stop grappling if we're close enough AND not attached to a moving platform
+        if (distanceToTarget < stopDistance && grappledObject == null)
         {
             StopGrapple();
-            Debug.Log("Grapple Stopped");
+            Debug.Log("Grapple Stopped - Distance: " + distanceToTarget);
         }
     }
 
@@ -182,7 +195,7 @@ public class GrapplingHook : MonoBehaviour
     {
         return grapplePoint;
     }
-    
+
     private void ShowAimingUI()
     {
         if (sightUI != null)
