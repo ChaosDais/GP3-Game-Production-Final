@@ -17,6 +17,7 @@ public class Attack : MonoBehaviour
 
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             anim.SetBool("isAttacking", true);
@@ -25,6 +26,7 @@ public class Attack : MonoBehaviour
         {
             anim.SetBool("isAttacking", false);
         }
+        */
     }
 
     private void OnTriggerEnter(Collider other)

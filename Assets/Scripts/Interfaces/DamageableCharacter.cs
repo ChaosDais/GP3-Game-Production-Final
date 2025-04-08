@@ -37,6 +37,7 @@ public class DamageableCharacter : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("Player died!");
                     canMove = false;
                 }
             }
@@ -62,13 +63,14 @@ public class DamageableCharacter : MonoBehaviour
     public virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
+        Targetable = targetable;
         health = maxHealth;
     }
 
     public virtual void OnHit(int damage)
     {
-        Debug.Log(gameObject.name + " took " + damage + " damage. " + health + " health remaining.");
         Health -= damage;
+        Debug.Log(gameObject.name + " took " + damage + " damage. " + health + " health remaining.");
     }
 
     public virtual void Heal(int health)
