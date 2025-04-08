@@ -43,16 +43,15 @@ public class GrapplingHook : MonoBehaviour
         {
             AimGrapple();
             ShowAimingUI();
+            if (Input.GetMouseButtonDown(0) && Input.GetMouseButton(1) && !IsGrappling())
+        {
+            StartGrapple();
+            Debug.Log("Grappling");
+        }
         }
         else
         {
             HideAimingUI();
-        }
-
-        if (Input.GetMouseButtonDown(0) && !IsGrappling())
-        {
-            StartGrapple();
-            Debug.Log("Grappling");
         }
 
         if (IsGrappling())
