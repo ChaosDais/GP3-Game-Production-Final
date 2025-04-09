@@ -30,6 +30,9 @@ public class GrapplingHook : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         rb = player.GetComponent<Rigidbody>();
+        lr.startWidth = 0.02f;
+        lr.endWidth = 0.02f;
+
     }
 
     void Awake()
