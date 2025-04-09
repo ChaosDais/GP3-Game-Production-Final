@@ -95,7 +95,7 @@ namespace Invector.vCharacterController
 
         public virtual void AttackInput()
         {
-            if (Input.GetKeyDown(attackInput))
+            if (!Input.GetMouseButtonDown(1) && Input.GetKeyDown(attackInput))
             {
                 sword.col.enabled = true;
                 cc.isAttacking = true;
