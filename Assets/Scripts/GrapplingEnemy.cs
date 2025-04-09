@@ -25,11 +25,12 @@ public class GrapplingEnemy : MonoBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        
         playerRb = player.GetComponent<Rigidbody>();
+        grapplingLine.startWidth = 0.02f;
+        grapplingLine.endWidth = 0.02f;
 
-        // If enemyTargetPoint is not assigned, create it
+
         if (enemyTargetPoint == null)
         {
             GameObject targetPoint = new GameObject("PullTargetPoint");
@@ -51,7 +52,7 @@ public class GrapplingEnemy : MonoBehaviour
         {
             PullEnemyTowardsPlayer();
 
-            if (Input.GetKey(KeyCode.LeftShift) || !Input.GetMouseButton(1))
+            if (Input.GetKey(KeyCode.LeftShift) || !Input.GetMouseButton(1)) //left shift or lmb to cancel
             {
                 StopEnemyGrapple();
                 return;
@@ -82,7 +83,10 @@ public class GrapplingEnemy : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-
+        float distance = Vector3.Distance(playerCamera.position, hookPoint);
+        float width = Mathf.Clamp(distance * 0.002f, 0.01f, 0.05f); // tweak multiplier & clamp as needed
+        grapplingLine.startWidth = width;
+        grapplingLine.endWidth = width;
     }
 
     void LateUpdate()

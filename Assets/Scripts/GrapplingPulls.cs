@@ -26,9 +26,10 @@ public class GrapplingPulls : MonoBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         playerRb = player.GetComponent<Rigidbody>();
+        pullLine.startWidth = 0.02f;
+        pullLine.endWidth = 0.02f;
+
 
         if (pullTargetPoint == null)
         {
@@ -101,6 +102,10 @@ public class GrapplingPulls : MonoBehaviour
     void LateUpdate()
     {
         DrawPullLine();
+        float distance = Vector3.Distance(camera.position, pullLocalPoint);
+        float width = Mathf.Clamp(distance * 0.002f, 0.01f, 0.05f); // tweak multiplier & clamp as needed
+        pullLine.startWidth = width;
+        pullLine.endWidth = width;
     }
 
     void AimPull()
@@ -202,10 +207,17 @@ public class GrapplingPulls : MonoBehaviour
     void DrawPullLine()
     {
         if (!isPulling && !isHolding) return;
-        currentPullPosition = Vector3.Lerp(currentPullPosition, pullPoint, Time.deltaTime * 12f);
+
+        // Make sure pullPoint tracks the object as it moves
+        if (pulledObject != null)
+        {
+            pullPoint = pulledObject.TransformPoint(pullLocalPoint);
+        }
+
         pullLine.SetPosition(0, gunTip.position);
-        pullLine.SetPosition(1, currentPullPosition);
+        pullLine.SetPosition(1, pullPoint);
     }
+
 
     private void ShowAimingUI()
     {
