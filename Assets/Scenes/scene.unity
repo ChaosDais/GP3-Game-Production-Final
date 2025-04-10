@@ -4277,9 +4277,9 @@ MonoBehaviour:
   enemyColor: {r: 1, g: 0, b: 0, a: 1}
   interactableColor: {r: 0, g: 1, b: 0, a: 1}
   neutralColor: {r: 1, g: 1, b: 1, a: 1}
-  defaultColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  defaultColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
   rayDistance: 100
-  cam: {fileID: 0}
+  cam: {fileID: 2700874171926520914}
 --- !u!114 &916499744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7650,6 +7650,11 @@ Transform:
 --- !u!4 &2700874171926520910 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5285183928902774884, guid: 27c3ee6de025d314fbef0676dbfc35de, type: 3}
+  m_PrefabInstance: {fileID: 3398525931686605546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &2700874171926520914 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3829601060146710199, guid: 27c3ee6de025d314fbef0676dbfc35de, type: 3}
   m_PrefabInstance: {fileID: 3398525931686605546}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2907992363639227839
