@@ -1022,8 +1022,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6198968607533934296, guid: 186bc09ddcba24347ae20cae4fd9795c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1552623625}
   m_SourcePrefab: {fileID: 100100000, guid: 186bc09ddcba24347ae20cae4fd9795c, type: 3}
+--- !u!1 &522455625 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6198968607533934296, guid: 186bc09ddcba24347ae20cae4fd9795c, type: 3}
+  m_PrefabInstance: {fileID: 522455624}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &547044618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2072,6 +2080,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27c3ee6de025d314fbef0676dbfc35de, type: 3}
+--- !u!20 &1035518132 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3829601060146710199, guid: 27c3ee6de025d314fbef0676dbfc35de, type: 3}
+  m_PrefabInstance: {fileID: 1035518131}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1057543904
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2885,6 +2898,34 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1436533026914555602, guid: 186bc09ddcba24347ae20cae4fd9795c, type: 3}
   m_PrefabInstance: {fileID: 522455624}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1552623625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522455625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3661dbe6f077e7448b79c934e44d2c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  grappleLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  reticle: {fileID: 0}
+  enemyColor: {r: 1, g: 0, b: 0, a: 1}
+  interactableColor: {r: 0, g: 1, b: 0, a: 1}
+  neutralColor: {r: 1, g: 1, b: 1, a: 1}
+  defaultColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  rayDistance: 100
+  cam: {fileID: 1035518132}
 --- !u!1001 &1619601401
 PrefabInstance:
   m_ObjectHideFlags: 0
