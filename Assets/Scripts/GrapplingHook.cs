@@ -69,11 +69,16 @@ public class GrapplingHook : MonoBehaviour
         {
             AimGrapple();
             ShowAimingUI();
-            if ((Input.GetMouseButtonDown(0) && Input.GetMouseButton(1)) || (isAiming && firePressed && !IsGrappling()))
+
+            // Start grapple when either using mouse controls or input system
+            if ((Input.GetMouseButtonDown(0)) || (isAiming && firePressed))
             {
-            StartGrapple();
-            Debug.Log("Grappling");
-            firePressed = false;
+                if (!IsGrappling())
+                {
+                    StartGrapple();
+                    Debug.Log("Grappling");
+                }
+                firePressed = false;
             }
         }
         else
@@ -85,17 +90,13 @@ public class GrapplingHook : MonoBehaviour
         {
             PullPlayerTowardsGrapple();
 
-            // LEFTSHIFTCANCEL
+            // Cancel grapple with either left shift or cancel button
             if (Input.GetKey(KeyCode.LeftShift) || cancelPressed)
             {
                 Debug.Log("Grapple cancelled by player");
                 StopGrapple();
+                cancelPressed = false;
             }
-        }
-
-        else if (Input.GetMouseButtonUp(0) && IsGrappling())
-        {
-            StopGrapple();
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))

@@ -1,10 +1,10 @@
-using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GrapplingEnemy : MonoBehaviour
 {
     public GameObject sightUI;
-    public Transform enemyTargetPoint; // Reference to where the enemy should be pulled to
+    public Transform enemyTargetPoint;
 
     private LineRenderer grapplingLine;
     private Vector3 hookPoint;
@@ -16,56 +16,89 @@ public class GrapplingEnemy : MonoBehaviour
     private float maxGrappleDistance = 100f;
     private Rigidbody pulledEnemyRb;
     private Rigidbody playerRb;
-    public float pullStopDistance = 0.5f; // Distance at which to stop pulling the enemy
+    public float pullStopDistance = 0.5f;
     private Vector3 pullDirection;
     public float pullSpeed = 15f;
     private bool isGrappling = false;
     public float pullForce = 10f;
     private Vector3 currentHookPosition;
 
+    // Input System
+    private InputSystem_Actions inputActions;
+    private bool isAiming = false;
+    private bool firePressed = false;
+    private bool cancelPressed = false;
+
+    private void Awake()
+    {
+        grapplingLine = GetComponent<LineRenderer>();
+        enemyLayer = LayerMask.GetMask("Enemy");
+        inputActions = new InputSystem_Actions();
+    }
+
+    private void OnEnable()
+    {
+        inputActions.Player.Enable();
+        inputActions.Player.Aim.performed += ctx => isAiming = true;
+        inputActions.Player.Aim.canceled += ctx => isAiming = false;
+        inputActions.Player.Interact.performed += ctx => firePressed = true;
+        inputActions.Player.CancelGrapple.performed += ctx => cancelPressed = true;
+    }
+
+    private void OnDisable()
+    {
+        inputActions.Player.Disable();
+    }
+
     private void Start()
     {
-        
         playerRb = player.GetComponent<Rigidbody>();
+
         grapplingLine.startWidth = 0.02f;
         grapplingLine.endWidth = 0.02f;
-
 
         if (enemyTargetPoint == null)
         {
             GameObject targetPoint = new GameObject("PullTargetPoint");
             enemyTargetPoint = targetPoint.transform;
             enemyTargetPoint.SetParent(player);
-            enemyTargetPoint.localPosition = new Vector3(0, 0, 1f); // 1 unit in front of the player
+            enemyTargetPoint.localPosition = new Vector3(0, 0, 1f);
         }
-    }
-
-    void Awake()
-    {
-        grapplingLine = GetComponent<LineRenderer>();
-        enemyLayer = LayerMask.GetMask("Enemy");
     }
 
     void Update()
     {
+        // Handle both mouse and controller input for aiming
+        bool isMouseAiming = Input.GetMouseButton(1);
+        bool isAimingInput = isMouseAiming || isAiming;
+
         if (isGrappling)
         {
             PullEnemyTowardsPlayer();
 
-            if (Input.GetKey(KeyCode.LeftShift) || !Input.GetMouseButton(1)) //left shift or lmb to cancel
+            // Only cancel if explicitly requested
+            if (Input.GetKey(KeyCode.LeftShift) || cancelPressed)
             {
                 StopEnemyGrapple();
+                cancelPressed = false;
                 return;
             }
         }
 
-        if (Input.GetMouseButton(1))
+        // Only need aim input for targeting and starting the pull
+        if (isAimingInput)
         {
             AimEnemyGrapple();
             ShowAimingUI();
-            if (Input.GetMouseButtonDown(0) && !isGrappling)
+
+            // Single press to start pull with either input method
+            if ((Input.GetMouseButtonDown(0) && isMouseAiming) || (firePressed && !isMouseAiming))
             {
-                StartEnemyGrapple();
+                if (!isGrappling)
+                {
+                    StartEnemyGrapple();
+                }
+                firePressed = false;
             }
         }
         else
@@ -73,18 +106,8 @@ public class GrapplingEnemy : MonoBehaviour
             HideAimingUI();
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-        else if (Input.GetMouseButtonDown(0))
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
         float distance = Vector3.Distance(playerCamera.position, hookPoint);
-        float width = Mathf.Clamp(distance * 0.002f, 0.01f, 0.05f); // tweak multiplier & clamp as needed
+        float width = Mathf.Clamp(distance * 0.002f, 0.01f, 0.05f);
         grapplingLine.startWidth = width;
         grapplingLine.endWidth = width;
     }
@@ -117,7 +140,7 @@ public class GrapplingEnemy : MonoBehaviour
             pulledEnemy = hit.transform;
             enemyLocalPoint = pulledEnemy.InverseTransformPoint(hit.point);
             hookPoint = hit.point;
-            
+
             pulledEnemyRb = pulledEnemy.GetComponent<Rigidbody>();
             if (pulledEnemyRb == null)
             {
@@ -187,8 +210,5 @@ public class GrapplingEnemy : MonoBehaviour
         {
             sightUI.SetActive(false);
         }
-
     }
-
-
 }

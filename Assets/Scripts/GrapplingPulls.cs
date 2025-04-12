@@ -1,5 +1,5 @@
-using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GrapplingPulls : MonoBehaviour
 {
@@ -24,12 +24,38 @@ public class GrapplingPulls : MonoBehaviour
     public float pullForce = 10f;
     private Vector3 currentPullPosition;
 
+    // Input System
+    private InputSystem_Actions inputActions;
+    private bool isAiming = false;
+    private bool firePressed = false;
+    private bool cancelPressed = false;
+
+    private void Awake()
+    {
+        pullLine = GetComponent<LineRenderer>();
+        inputActions = new InputSystem_Actions();
+    }
+
+    private void OnEnable()
+    {
+        inputActions.Player.Enable();
+        inputActions.Player.Aim.performed += ctx => isAiming = true;
+        inputActions.Player.Aim.canceled += ctx => isAiming = false;
+        inputActions.Player.Interact.performed += ctx => firePressed = true;
+        inputActions.Player.CancelGrapple.performed += ctx => cancelPressed = true;
+    }
+
+    private void OnDisable()
+    {
+        inputActions.Player.Disable();
+    }
+
     private void Start()
     {
         playerRb = player.GetComponent<Rigidbody>();
+
         pullLine.startWidth = 0.02f;
         pullLine.endWidth = 0.02f;
-
 
         if (pullTargetPoint == null)
         {
@@ -40,13 +66,12 @@ public class GrapplingPulls : MonoBehaviour
         }
     }
 
-    void Awake()
-    {
-        pullLine = GetComponent<LineRenderer>();
-    }
-
     void Update()
     {
+        // Handle both mouse and controller input for aiming
+        bool isMouseAiming = Input.GetMouseButton(1);
+        bool isAimingInput = isMouseAiming || isAiming;
+
         if (isHolding)
         {
             if (pulledObjectRb != null)
@@ -55,55 +80,57 @@ public class GrapplingPulls : MonoBehaviour
                 pulledObjectRb.position = pullTargetPoint.position;
             }
 
-            if (Input.GetKey(KeyCode.LeftShift))
+            // Handle both mouse and controller cancel
+            if (Input.GetKey(KeyCode.LeftShift) || cancelPressed)
             {
                 ReleaseObject();
+                cancelPressed = false;
             }
             return;
         }
 
+        // Once pulling starts, continue until completion or cancel
         if (isPulling)
         {
             PullObjectTowardsPlayer();
 
-            if (Input.GetKey(KeyCode.LeftShift) || !Input.GetMouseButton(1))
+            // Only cancel if explicitly requested
+            if (Input.GetKey(KeyCode.LeftShift) || cancelPressed)
             {
                 StopPull();
+                cancelPressed = false;
                 return;
             }
         }
 
-        if (Input.GetMouseButton(1))
+        // Only need aim input for targeting and starting the pull
+        if (isAimingInput)
         {
             AimPull();
             ShowAimingUI();
-            if (Input.GetMouseButtonDown(0) && !isPulling && !isHolding)
+
+            // Single press to start pull
+            if ((Input.GetMouseButtonDown(0) && isMouseAiming) || (firePressed && !isMouseAiming))
             {
-                StartPull();
+                if (!isPulling && !isHolding)
+                {
+                    StartPull();
+                }
+                firePressed = false;
             }
         }
         else
         {
             HideAimingUI();
         }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-        else if (Input.GetMouseButtonDown(0))
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
     }
 
     void LateUpdate()
     {
         DrawPullLine();
-        float distance = Vector3.Distance(camera.position, pullLocalPoint);
-        float width = Mathf.Clamp(distance * 0.002f, 0.01f, 0.05f); // tweak multiplier & clamp as needed
+
+        float distance = Vector3.Distance(camera.position, pullPoint);
+        float width = Mathf.Clamp(distance * 0.002f, 0.01f, 0.05f);
         pullLine.startWidth = width;
         pullLine.endWidth = width;
     }
@@ -208,7 +235,6 @@ public class GrapplingPulls : MonoBehaviour
     {
         if (!isPulling && !isHolding) return;
 
-        // Make sure pullPoint tracks the object as it moves
         if (pulledObject != null)
         {
             pullPoint = pulledObject.TransformPoint(pullLocalPoint);
@@ -217,7 +243,6 @@ public class GrapplingPulls : MonoBehaviour
         pullLine.SetPosition(0, gunTip.position);
         pullLine.SetPosition(1, pullPoint);
     }
-
 
     private void ShowAimingUI()
     {
