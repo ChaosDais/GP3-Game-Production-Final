@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Invector.vCharacterController
 {
@@ -25,6 +26,19 @@ namespace Invector.vCharacterController
         Attack sword;
 
         #endregion
+        #region Variables Controller
+
+        
+        private InputSystem_Actions inputActions;
+
+        Vector2 moveInput;
+        Vector2 lookInput;
+        bool jumpPressed;
+        bool sprintHeld;
+        bool strafePressed;
+        bool attackPressed;
+
+        #endregion
 
         protected virtual void Start()
         {
@@ -40,17 +54,53 @@ namespace Invector.vCharacterController
             InitializeTpCamera();
         }
 
+        void Awake()
+        {
+            inputActions = new InputSystem_Actions();
+        }
+
         protected virtual void FixedUpdate()
         {
             cc.UpdateMotor();               // updates the ThirdPersonMotor methods
             cc.ControlLocomotionType();     // handle the controller locomotion type and movespeed
             cc.ControlRotationType();       // handle the controller rotation type
         }
-
+        void OnEnable()
+        {
+            inputActions.Player.Enable();
+        }
+        void OnDisable()
+        {
+            inputActions.Player.Disable();
+        }
         protected virtual void Update()
         {
             InputHandle();                  // update the input methods
             cc.UpdateAnimator();            // updates the Animator Parameters
+            moveInput = inputActions.Player.Move.ReadValue<Vector2>();
+            lookInput = inputActions.Player.Look.ReadValue<Vector2>();
+
+            MoveInput();
+            CameraInput();
+            if (jumpPressed)
+            {
+                JumpInput();
+                jumpPressed = false;
+            }
+
+            SprintInput();
+
+            if (strafePressed)
+            {
+                StrafeInput();
+                strafePressed = false;
+            }
+
+            if (attackPressed)
+            {
+                AttackInput();
+                attackPressed = false;
+            }
         }
 
         public virtual void OnAnimatorMove()
@@ -115,6 +165,8 @@ namespace Invector.vCharacterController
         {
             cc.input.x = Input.GetAxis(horizontalInput);
             cc.input.z = Input.GetAxis(verticallInput);
+            cc.input.x = moveInput.x;
+            cc.input.z = moveInput.y;
         }
 
         protected virtual void CameraInput()
@@ -136,6 +188,9 @@ namespace Invector.vCharacterController
 
             if (tpCamera == null)
                 return;
+            if (tpCamera != null)
+                tpCamera.RotateCamera(lookInput.x, lookInput.y);
+
 
             var Y = Input.GetAxis(rotateCameraYInput);
             var X = Input.GetAxis(rotateCameraXInput);
@@ -169,7 +224,7 @@ namespace Invector.vCharacterController
         /// <summary>
         /// Input to trigger the Jump 
         /// </summary>
-        protected virtual void JumpInput()
+        protected virtual void JumpInput() 
         {
             if (Input.GetKeyDown(jumpInput) && JumpConditions())
                 cc.Jump();
