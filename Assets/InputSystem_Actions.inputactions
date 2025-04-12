@@ -103,6 +103,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Steal",
+                    "type": "Button",
+                    "id": "69674d50-6444-448c-9397-1042f4b60b57",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -306,17 +315,6 @@
                 },
                 {
                     "name": "",
-                    "id": "ee3d0cd2-254e-47a7-a8cb-bc94d9658c54",
-                    "path": "<Joystick>/trigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "8255d333-5683-4943-a58a-ccb207ff1dce",
                     "path": "<XRController>/{PrimaryAction}",
                     "interactions": "",
@@ -510,6 +508,17 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "CancelGrapple",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5f1278e5-4f43-4fa7-b110-5e5e421b0ee0",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steal",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

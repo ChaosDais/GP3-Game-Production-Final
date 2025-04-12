@@ -28,7 +28,7 @@ namespace Invector.vCharacterController
         #endregion
         #region Variables Controller
 
-        
+
         private InputSystem_Actions inputActions;
 
         Vector2 moveInput;
@@ -68,6 +68,11 @@ namespace Invector.vCharacterController
         void OnEnable()
         {
             inputActions.Player.Enable();
+            inputActions.Player.Jump.performed += ctx => jumpPressed = true;
+            inputActions.Player.Attack.performed += ctx => attackPressed = true;
+            inputActions.Player.Sprint.performed += ctx => cc.Sprint(true);
+            inputActions.Player.Sprint.canceled += ctx => cc.Sprint(false);
+            
         }
         void OnDisable()
         {
@@ -75,25 +80,33 @@ namespace Invector.vCharacterController
         }
         protected virtual void Update()
         {
-            InputHandle();                  // update the input methods
             cc.UpdateAnimator();            // updates the Animator Parameters
+
+            // Handle both controller and keyboard/mouse inputs
             moveInput = inputActions.Player.Move.ReadValue<Vector2>();
             lookInput = inputActions.Player.Look.ReadValue<Vector2>();
 
-            MoveInput();
-            CameraInput();
-            if (jumpPressed)
+            // Keyboard/Mouse inputs
+            if (Input.GetKeyDown(jumpInput) && JumpConditions())
             {
-                JumpInput();
-                jumpPressed = false;
+                cc.Jump();
             }
 
-            SprintInput();
+            if (Input.GetKeyDown(attackInput) && !Input.GetMouseButton(1))
+            {
+                AttackInput();
+            }
 
-            if (strafePressed)
+            if (Input.GetKeyDown(strafeInput))
             {
                 StrafeInput();
-                strafePressed = false;
+            }
+
+            // Handle controller inputs
+            if (jumpPressed && JumpConditions())
+            {
+                cc.Jump();
+                jumpPressed = false;
             }
 
             if (attackPressed)
@@ -101,6 +114,16 @@ namespace Invector.vCharacterController
                 AttackInput();
                 attackPressed = false;
             }
+
+            if (strafePressed)
+            {
+                StrafeInput();
+                strafePressed = false;
+            }
+
+            // Common input handling
+            MoveInput();
+            CameraInput();
         }
 
         public virtual void OnAnimatorMove()
@@ -145,14 +168,11 @@ namespace Invector.vCharacterController
 
         public virtual void AttackInput()
         {
-            if (!Input.GetMouseButton(1) && Input.GetKeyDown(attackInput))
-            {
-                sword.col.enabled = true;
-                cc.isAttacking = true;
-                Debug.Log("Set isAttacking to " + cc.isAttacking);
-                Invoke(nameof(AttackEnd), 1.2f);
-            }
+            sword.col.enabled = true;
+            cc.isAttacking = true;
+            Invoke(nameof(AttackEnd), 1.2f);
         }
+        
 
         public virtual void AttackEnd()
         {
@@ -206,6 +226,7 @@ namespace Invector.vCharacterController
 
         protected virtual void SprintInput()
         {
+            // Sprint is now handled through input actions in OnEnable
             if (Input.GetKeyDown(sprintInput))
                 cc.Sprint(true);
             else if (Input.GetKeyUp(sprintInput))
@@ -224,9 +245,10 @@ namespace Invector.vCharacterController
         /// <summary>
         /// Input to trigger the Jump 
         /// </summary>
-        protected virtual void JumpInput() 
+        protected virtual void JumpInput()
         {
-            if (Input.GetKeyDown(jumpInput) && JumpConditions())
+            // Jump is now handled in Update for both input methods
+            if (JumpConditions())
                 cc.Jump();
         }
 

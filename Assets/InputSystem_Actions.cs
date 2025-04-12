@@ -125,6 +125,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Steal"",
+                    ""type"": ""Button"",
+                    ""id"": ""69674d50-6444-448c-9397-1042f4b60b57"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -328,17 +337,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ee3d0cd2-254e-47a7-a8cb-bc94d9658c54"",
-                    ""path"": ""<Joystick>/trigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""8255d333-5683-4943-a58a-ccb207ff1dce"",
                     ""path"": ""<XRController>/{PrimaryAction}"",
                     ""interactions"": """",
@@ -532,6 +530,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
                     ""action"": ""CancelGrapple"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f1278e5-4f43-4fa7-b110-5e5e421b0ee0"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1130,6 +1139,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_CancelGrapple = m_Player.FindAction("CancelGrapple", throwIfNotFound: true);
+        m_Player_Steal = m_Player.FindAction("Steal", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1220,6 +1230,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Aim;
     private readonly InputAction m_Player_CancelGrapple;
+    private readonly InputAction m_Player_Steal;
     public struct PlayerActions
     {
         private @InputSystem_Actions m_Wrapper;
@@ -1235,6 +1246,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
         public InputAction @CancelGrapple => m_Wrapper.m_Player_CancelGrapple;
+        public InputAction @Steal => m_Wrapper.m_Player_Steal;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1277,6 +1289,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @CancelGrapple.started += instance.OnCancelGrapple;
             @CancelGrapple.performed += instance.OnCancelGrapple;
             @CancelGrapple.canceled += instance.OnCancelGrapple;
+            @Steal.started += instance.OnSteal;
+            @Steal.performed += instance.OnSteal;
+            @Steal.canceled += instance.OnSteal;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1314,6 +1329,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @CancelGrapple.started -= instance.OnCancelGrapple;
             @CancelGrapple.performed -= instance.OnCancelGrapple;
             @CancelGrapple.canceled -= instance.OnCancelGrapple;
+            @Steal.started -= instance.OnSteal;
+            @Steal.performed -= instance.OnSteal;
+            @Steal.canceled -= instance.OnSteal;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1507,6 +1525,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnCancelGrapple(InputAction.CallbackContext context);
+        void OnSteal(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
