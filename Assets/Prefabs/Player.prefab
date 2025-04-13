@@ -2246,6 +2246,8 @@ GameObject:
   - component: {fileID: 8810756257713191079}
   - component: {fileID: 3353427266414782884}
   - component: {fileID: 5941451481841969886}
+  - component: {fileID: -9103175536375122733}
+  - component: {fileID: -1411672018206786027}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -2589,10 +2591,12 @@ MonoBehaviour:
   health: 10
   targetable: 1
   isPlayer: 1
+  dropsAbility: 0
   rb: {fileID: 0}
   OnDestroyEvents:
     m_PersistentCalls:
       m_Calls: []
+  abilityDrop: {fileID: 0}
 --- !u!114 &3353427266414782884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2639,6 +2643,30 @@ MonoBehaviour:
   pullStopDistance: 0.5
   pullSpeed: 15
   pullForce: 10
+--- !u!114 &-9103175536375122733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6198968607533934296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84b84cc1a4d41bf46ad89fd3e0139a3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1411672018206786027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6198968607533934296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84b84cc1a4d41bf46ad89fd3e0139a3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6247037962025147916
 GameObject:
   m_ObjectHideFlags: 0

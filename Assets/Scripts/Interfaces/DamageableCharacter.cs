@@ -54,12 +54,19 @@ public class DamageableCharacter : MonoBehaviour
     public int health = 10;
     public bool targetable = true;
     public bool isPlayer = false;
+    public bool dropsAbility = false;
 
     [HideInInspector] public Rigidbody rb;
 
     public UnityEvent OnDestroyEvents;
 
-    // Start is called before the first frame update
+    #region Ability Drop Variables
+    public GameObject abilityDrop; // Determines which ability this character drops when defeated
+
+    readonly float dropForce = 1; // Force when arcane soul pops out from character
+    readonly float spawnOffset = 0.1f; // Randomization of where loot spawns from character
+    #endregion
+
     public virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -81,6 +88,18 @@ public class DamageableCharacter : MonoBehaviour
     public virtual void RemoveCharacter()
     {
         OnDestroyEvents.Invoke(); // Invoke any special events when destroyed
+
+        if (dropsAbility)
+        {
+            Vector3 spawn = new(transform.position.x + Random.Range(-spawnOffset, spawnOffset), 
+                transform.position.y + Random.Range(0, spawnOffset), 
+                transform.position.z + Random.Range(-spawnOffset, spawnOffset));
+            GameObject arcaneSoul = Instantiate(abilityDrop, spawn, Quaternion.identity); // Spawns arcane soul
+            Debug.Log("Created " + arcaneSoul.name);
+
+            arcaneSoul.GetComponent<Rigidbody>().AddExplosionForce(dropForce, transform.position - transform.up, 5); // Applies pop force
+        }
+
         Destroy(gameObject);
     }
 

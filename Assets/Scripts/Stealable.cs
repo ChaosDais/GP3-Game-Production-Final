@@ -6,7 +6,6 @@ using UnityEngine;
 public class Stealable : Interactable
 {
     Outline outline;
-    bool hasAbility = true;
 
     public override void Start()
     {
@@ -25,7 +24,7 @@ public class Stealable : Interactable
 
     private void OnTriggerStay(Collider other)
     {
-        if (CompareTag("StealableEnemy") && other.CompareTag("Player") && hasAbility)
+        if (CompareTag("ArcaneSoul") && other.CompareTag("Player"))
         {
             outline.enabled = true;
         }
@@ -39,5 +38,10 @@ public class Stealable : Interactable
         {
             outline.enabled = false;
         }
+    }
+
+    public void DestroySoul()
+    {
+        Destroy(gameObject);
     }
 }

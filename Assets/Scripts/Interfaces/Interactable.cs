@@ -6,7 +6,8 @@ using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
-    public SphereCollider col;
+    [Tooltip("This interactable's sphere collider (Must be set to Trigger; there must only be one sphere collider)")]
+    public SphereCollider sphereTriggerCollider;
     [Tooltip("Actual interactable model, used for distance calculations.")]
     public Transform interactable;
     [Tooltip("Events to run when interactings.")]
@@ -25,7 +26,6 @@ public class Interactable : MonoBehaviour
     float promptYVelocity;
 
     bool hasPlayer = false; // Whether player is inside interaction range
-    Transform player;
     Transform playerCamera;
     bool canInteract = true; // Whether player can interact or not
     bool isFacing = false; // Whether player is facing interactable or not
@@ -33,7 +33,6 @@ public class Interactable : MonoBehaviour
 
     public virtual void Start()
     {
-        player = GameObject.FindWithTag("Player").transform;
         playerCamera = GameObject.FindWithTag("MainCamera").transform;
         promptCanvas.SetActive(false);
     }

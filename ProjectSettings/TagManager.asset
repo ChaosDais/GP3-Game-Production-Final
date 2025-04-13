@@ -9,6 +9,8 @@ TagManager:
   - StealableEnemy
   - FriendlyAttack
   - Sword
+  - Interact
+  - ArcaneSoul
   layers:
   - Default
   - TransparentFX
