@@ -6,6 +6,11 @@ public class GrapplingHook : MonoBehaviour
     //Possible UI sight here not sure if this will work, video said it should tho
     public GameObject sightUI;
 
+    // Grappling Hook object and animation
+    private GameObject grappleHookObject;
+    private Animator grappleAnimator;
+    private bool isHookAnimating = false;
+
     // Line renderer and grappling stuff
     private LineRenderer lr;
     private Vector3 grapplePoint;
@@ -60,6 +65,17 @@ public class GrapplingHook : MonoBehaviour
         lr.startWidth = 0.02f;
         lr.endWidth = 0.02f;
 
+        // Find and initially hide the grappling hook object
+        grappleHookObject = GameObject.FindGameObjectWithTag("Graphook");
+        if (grappleHookObject != null)
+        {
+            grappleAnimator = grappleHookObject.GetComponent<Animator>();
+            grappleHookObject.SetActive(false);
+        }
+        else
+        {
+            Debug.LogWarning("No object with tag 'Graphook' found!");
+        }
     }
 
 
@@ -118,6 +134,15 @@ public class GrapplingHook : MonoBehaviour
 
     void AimGrapple()
     {
+        // Show and animate grappling hook if not already doing so
+        if (!isHookAnimating && grappleHookObject != null)
+        {
+            grappleHookObject.SetActive(true);
+            grappleHookObject.transform.position = gunTip.position;
+            grappleAnimator.SetTrigger("Idle"); // Make sure you have an "Idle" animation parameter
+            isHookAnimating = true;
+        }
+
         RaycastHit hit;
         if (Physics.Raycast(camera.position, camera.forward, out hit, maxDistance, whatIsGrappleable))
         {
@@ -134,6 +159,13 @@ public class GrapplingHook : MonoBehaviour
     {
         Debug.Log("GRAPPING FR FR");
         isGrappling = true;
+
+        // Stop idle animation and start grapple animation
+        if (grappleHookObject != null && grappleAnimator != null)
+        {
+            grappleAnimator.SetTrigger("Shoot"); // Make sure you have a "Shoot" animation parameter
+        }
+
         RaycastHit hit;
         if (Physics.Raycast(camera.position, camera.forward, out hit, maxDistance, whatIsGrappleable))
         {
@@ -166,6 +198,13 @@ public class GrapplingHook : MonoBehaviour
         isGrappling = false;
         lr.enabled = false;
         grappledObject = null;
+
+        // Hide grappling hook and reset animation state
+        if (grappleHookObject != null)
+        {
+            grappleHookObject.SetActive(false);
+            isHookAnimating = false;
+        }
     }
 
     void DrawRope()
@@ -174,6 +213,14 @@ public class GrapplingHook : MonoBehaviour
         currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 12f);
         lr.SetPosition(0, gunTip.position);
         lr.SetPosition(1, currentGrapplePosition);
+
+        // Update grappling hook object position along the rope
+        if (grappleHookObject != null && isGrappling)
+        {
+            grappleHookObject.transform.position = currentGrapplePosition;
+            // Make the hook look at the grapple point
+            grappleHookObject.transform.LookAt(grapplePoint);
+        }
     }
 
     void PullPlayerTowardsGrapple()
@@ -236,6 +283,13 @@ public class GrapplingHook : MonoBehaviour
         if (sightUI != null)
         {
             sightUI.SetActive(false);
+        }
+
+        // Hide grappling hook when not aiming
+        if (grappleHookObject != null && !isGrappling)
+        {
+            grappleHookObject.SetActive(false);
+            isHookAnimating = false;
         }
     }
 }

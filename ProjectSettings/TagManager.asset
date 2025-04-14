@@ -11,6 +11,7 @@ TagManager:
   - Sword
   - Interact
   - ArcaneSoul
+  - Graphook
   layers:
   - Default
   - TransparentFX
