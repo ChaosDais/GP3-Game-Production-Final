@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class FlyingEnemyBehavior : MonoBehaviour
+public class FlyingEnemyBehavior : DamageableCharacter
 {
     [Header("Navigation")]
     public NavMeshAgent agent;
@@ -21,8 +21,9 @@ public class FlyingEnemyBehavior : MonoBehaviour
     private Transform player;
     private bool playerInRange;
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
        
         agent = GetComponent<NavMeshAgent>();
         if (agent)

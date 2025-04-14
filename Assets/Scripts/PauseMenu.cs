@@ -4,6 +4,7 @@ public class PauseMenu : MonoBehaviour
 {
     // Reference to the pause menu UI panel
     public GameObject pauseMenuUI;
+    public GameObject gameUI;
 
     // Bool to track if the game is paused
     private bool isPaused = false;
@@ -39,6 +40,7 @@ public class PauseMenu : MonoBehaviour
         if (pauseMenuUI != null)
         {
             pauseMenuUI.SetActive(false);
+            gameUI.SetActive(true);
         }
 
         // Resume the game by setting timeScale to 1
@@ -54,6 +56,7 @@ public class PauseMenu : MonoBehaviour
         if (pauseMenuUI != null)
         {
             pauseMenuUI.SetActive(true);
+            gameUI.SetActive(false);
         }
 
         // Pause the game by setting timeScale to 0

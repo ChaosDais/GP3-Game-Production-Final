@@ -1,18 +1,22 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : DamageableCharacter
+public class EnemyPatrol : DamageableCharacter
 {
     public Transform[] patrolPoints;
-    public Transform player;
+    
     public float chaseRadius = 10f;
 
     private NavMeshAgent agent;
     private int currentPatrolIndex = 0;
     private bool isChasing = false;
+    Transform player;
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
+
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         PatrolNextPoint();
     }
@@ -39,7 +43,7 @@ public class EnemyAI : DamageableCharacter
 
     void PatrolNextPoint()
     {
-        if (patrolPoints.Length == 0)
+        if (patrolPoints == null || patrolPoints.Length == 0)
             return;
 
         agent.destination = patrolPoints[currentPatrolIndex].position;
