@@ -21,7 +21,7 @@ public class Interactable : MonoBehaviour
     [Tooltip("Speed at which canvas turns to face player")]
     public float smoothSpeed = 5;
     [Tooltip("Button player must press to interact")]
-    public KeyCode interactKey;
+    public KeyCode interactKey = KeyCode.E;
 
     float promptYVelocity;
 

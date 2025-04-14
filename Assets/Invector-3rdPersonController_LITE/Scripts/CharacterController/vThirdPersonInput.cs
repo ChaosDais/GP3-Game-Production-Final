@@ -14,6 +14,7 @@ namespace Invector.vCharacterController
         public KeyCode strafeInput = KeyCode.Tab;
         public KeyCode sprintInput = KeyCode.LeftShift;
         public KeyCode attackInput = KeyCode.Mouse0;
+        public KeyCode abilityInput = KeyCode.F;
 
         [Header("Camera Input")]
         public string rotateCameraXInput = "Mouse X";

@@ -7,7 +7,7 @@ public class GhostStep : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        print("Ghost Step!");
     }
 
     // Update is called once per frame

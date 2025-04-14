@@ -2246,8 +2246,7 @@ GameObject:
   - component: {fileID: 8810756257713191079}
   - component: {fileID: 3353427266414782884}
   - component: {fileID: 5941451481841969886}
-  - component: {fileID: -9103175536375122733}
-  - component: {fileID: -1411672018206786027}
+  - component: {fileID: 869144562184315770}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -2560,7 +2559,7 @@ MonoBehaviour:
   player: {fileID: 1436533026914555602}
   stopDistance: 5
   grappleSpeed: 10
-  pullForce: 5
+  pullForce: 25
 --- !u!114 &1997096853859873682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2643,7 +2642,7 @@ MonoBehaviour:
   pullStopDistance: 0.5
   pullSpeed: 15
   pullForce: 10
---- !u!114 &-9103175536375122733
+--- !u!114 &869144562184315770
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2652,21 +2651,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 6198968607533934296}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84b84cc1a4d41bf46ad89fd3e0139a3e, type: 3}
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-1411672018206786027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6198968607533934296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84b84cc1a4d41bf46ad89fd3e0139a3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: b039297bf64f8ff43bd98db6a8292e4e, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &6247037962025147916
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class Stealable : Interactable
 {
+    [Tooltip("No spaces.")]
+    public string abilityName;
+
     Outline outline;
+    AbilitySteal player;
 
     public override void Start()
     {
         base.Start();
 
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<AbilitySteal>();
         if(GetComponent<Outline>() != null)
         {
             outline = GetComponent<Outline>();
@@ -40,6 +45,10 @@ public class Stealable : Interactable
         }
     }
 
+    public void GiveAbility()
+    {
+        player.GainAbility(abilityName);
+    }
     public void DestroySoul()
     {
         Destroy(gameObject);

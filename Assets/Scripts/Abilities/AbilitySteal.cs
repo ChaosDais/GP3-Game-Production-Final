@@ -10,10 +10,10 @@ public class AbilitySteal : MonoBehaviour
     public TextMeshProUGUI abilityText;
     public enum Ability
     {
-        None = 0,
-        FastDash = 1,
-        FireBall = 2,
-        GhostStep = 3
+        None,
+        FastDash,
+        FireBall,
+        GhostStep
     }
 
     private Ability currentAbility;
@@ -28,14 +28,6 @@ public class AbilitySteal : MonoBehaviour
 
     public void GainAbility(string name)
     {
-        if(abilityText != null)
-        {
-            abilityText.text = name;
-        }
-        else
-        {
-            Debug.LogError("Text is null!");
-        }
         Debug.Log("Current ability is " + currentAbility + " and new ability is " + newAbility);
         // Convert Arcane Soul's name into a matching enum
         if (Enum.TryParse(name, out newAbility))
@@ -71,14 +63,17 @@ public class AbilitySteal : MonoBehaviour
         switch (abil)
         {
             case Ability.FastDash:
+                abilityText.text = "Fast Dash";
                 gameObject.AddComponent<FastDash>();
                 currentAbility = Ability.FastDash;
                 break;
             case Ability.FireBall:
+                abilityText.text = "Fire Ball";
                 gameObject.AddComponent<FireBall>();
                 currentAbility = Ability.FireBall;
                 break;
             case Ability.GhostStep:
+                abilityText.text = "Ghost Step";
                 gameObject.AddComponent<GhostStep>();
                 currentAbility = Ability.GhostStep;
                 break;

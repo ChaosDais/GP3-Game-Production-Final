@@ -386,10 +386,10 @@ MonoBehaviour:
   interactEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1997096853859873682, guid: 186bc09ddcba24347ae20cae4fd9795c, type: 3}
-        m_TargetAssemblyTypeName: AbilitySteal, Assembly-CSharp
-        m_MethodName: GainAbility
-        m_Mode: 5
+      - m_Target: {fileID: 5171544766708835898}
+        m_TargetAssemblyTypeName: Stealable, Assembly-CSharp
+        m_MethodName: GiveAbility
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -419,6 +419,7 @@ MonoBehaviour:
   promptCanvas: {fileID: 4544930170030736715}
   smoothSpeed: 5
   interactKey: 101
+  abilityName: FastDash
 --- !u!114 &3667939242647979094
 MonoBehaviour:
   m_ObjectHideFlags: 0
