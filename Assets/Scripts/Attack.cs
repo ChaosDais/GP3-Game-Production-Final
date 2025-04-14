@@ -20,8 +20,6 @@ public class Attack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetType() == typeof(CapsuleCollider))
-        {
             DamageableCharacter damageable = other.gameObject.GetComponent<DamageableCharacter>();
             if (damageable && other.gameObject.CompareTag("Player") && !playerSourced)
             {
@@ -31,7 +29,5 @@ public class Attack : MonoBehaviour
             {
                 damageable.OnHit(damage);
             }
-        }
-        
     }
 }
