@@ -3115,12 +3115,6 @@ PrefabInstance:
       addedObject: {fileID: 616582476}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 76439466d20da824cbd9c1b10ec20db6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 616582479}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 76439466d20da824cbd9c1b10ec20db6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 616582480}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 76439466d20da824cbd9c1b10ec20db6, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 616582484}
   m_SourcePrefab: {fileID: 100100000, guid: 76439466d20da824cbd9c1b10ec20db6, type: 3}
 --- !u!1 &616582471 stripped
@@ -3204,74 +3198,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.04
   m_Center: {x: 0.0000007762575, y: 0.000003298046, z: -0.000031103442}
---- !u!114 &616582479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616582471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 0.70375204, g: 0, b: 1, a: 1}
-  outlineWidth: 10
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &616582480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616582471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4459b195778a0ad49becc5fff828de28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  col: {fileID: 616582478}
-  interactable: {fileID: 616582475}
-  interactEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1634382438}
-        m_TargetAssemblyTypeName: AbilitySteal, Assembly-CSharp
-        m_MethodName: GainAbility
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Rudolph Blast
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 616582480}
-        m_TargetAssemblyTypeName: Interactable, Assembly-CSharp
-        m_MethodName: SetInteractableActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Rudolph Blast
-          m_BoolArgument: 0
-        m_CallState: 2
-  leaveEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  activateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  promptCanvas: {fileID: 2092063863}
-  smoothSpeed: 5
-  interactKey: 101
 --- !u!114 &616582484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3289,10 +3215,12 @@ MonoBehaviour:
   health: 10
   targetable: 1
   isPlayer: 0
+  dropsAbility: 1
   rb: {fileID: 0}
   OnDestroyEvents:
     m_PersistentCalls:
       m_Calls: []
+  abilityDrop: {fileID: 4606829459511083081, guid: 65723fc584a3e9e48937908833601435, type: 3}
   damage: 5
 --- !u!43 &617359445
 Mesh:
@@ -3708,7 +3636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4459b195778a0ad49becc5fff828de28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  col: {fileID: 0}
+  sphereTriggerCollider: {fileID: 0}
   interactable: {fileID: 0}
   interactEvent:
     m_PersistentCalls:
@@ -5998,17 +5926,6 @@ MonoBehaviour:
   isHorizontal: 0
   speed: 1
   distance: 6
---- !u!114 &1634382438 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1997096853859873682, guid: 186bc09ddcba24347ae20cae4fd9795c, type: 3}
-  m_PrefabInstance: {fileID: 2907992363639227839}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 769461123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c17273158639a124fb8a45efedc3b34a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1692555911
 GameObject:
   m_ObjectHideFlags: 0

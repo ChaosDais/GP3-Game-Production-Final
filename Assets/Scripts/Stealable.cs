@@ -5,13 +5,17 @@ using UnityEngine;
 
 public class Stealable : Interactable
 {
+    [Tooltip("No spaces.")]
+    public string abilityName;
+
     Outline outline;
-    bool hasAbility = true;
+    AbilitySteal player;
 
     public override void Start()
     {
         base.Start();
 
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<AbilitySteal>();
         if(GetComponent<Outline>() != null)
         {
             outline = GetComponent<Outline>();
@@ -25,7 +29,7 @@ public class Stealable : Interactable
 
     private void OnTriggerStay(Collider other)
     {
-        if (CompareTag("StealableEnemy") && other.CompareTag("Player") && hasAbility)
+        if (CompareTag("ArcaneSoul") && other.CompareTag("Player"))
         {
             outline.enabled = true;
         }
@@ -39,5 +43,14 @@ public class Stealable : Interactable
         {
             outline.enabled = false;
         }
+    }
+
+    public void GiveAbility()
+    {
+        player.GainAbility(abilityName);
+    }
+    public void DestroySoul()
+    {
+        Destroy(gameObject);
     }
 }
