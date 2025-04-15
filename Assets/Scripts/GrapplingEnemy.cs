@@ -120,10 +120,18 @@ public class GrapplingEnemy : MonoBehaviour
     void AimEnemyGrapple()
     {
         RaycastHit hit;
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxGrappleDistance, enemyLayer))
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxGrappleDistance, enemyLayer, QueryTriggerInteraction.Ignore))
         {
-            hookPoint = hit.point;
-            currentHookPosition = hookPoint;
+            // Ignore if we hit our own collider
+            if (hit.collider.transform != transform)
+            {
+                hookPoint = hit.point;
+                currentHookPosition = hookPoint;
+            }
+            else
+            {
+                hookPoint = playerCamera.position + playerCamera.forward * maxGrappleDistance;
+            }
         }
         else
         {
@@ -134,7 +142,7 @@ public class GrapplingEnemy : MonoBehaviour
     void StartEnemyGrapple()
     {
         RaycastHit hit;
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxGrappleDistance, enemyLayer))
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxGrappleDistance, enemyLayer, QueryTriggerInteraction.Ignore) && hit.collider.transform != transform)
         {
             isGrappling = true;
             pulledEnemy = hit.transform;

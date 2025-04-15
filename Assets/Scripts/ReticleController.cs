@@ -21,7 +21,7 @@ public class ReticleController : MonoBehaviour
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, rayDistance))
+        if (Physics.Raycast(ray, out hit, rayDistance, -1, QueryTriggerInteraction.Ignore) && hit.collider.transform != transform)
         {
             int hitLayer = 1 << hit.collider.gameObject.layer;
 
