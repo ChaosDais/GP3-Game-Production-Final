@@ -11,5 +11,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Vert_Slice_Test.unity
     guid: 72a8ae6be73a1914ea7bdf1996766ce2
+  - enabled: 1
+    path: Assets/Scenes/HowToPlay.unity
+    guid: 5774ff4c21ad0d84b80a29a7627bc8bc
+  - enabled: 1
+    path: Assets/Scenes/WinScreen.unity
+    guid: 4700744733b64984b92a6c5385adc52c
+  - enabled: 1
+    path: Assets/Scenes/LoseScreen.unity
+    guid: 7cfa01f3705dbf04ab3581de4507d1a4
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: b039297bf64f8ff43bd98db6a8292e4e, type: 3}
