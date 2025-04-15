@@ -169,10 +169,15 @@ namespace Invector.vCharacterController
 
         public virtual void AttackInput()
         {
-            sword.col.enabled = true;
-            cc.isAttacking = true;
-            Invoke(nameof(AttackEnd), 1.2f);
+            if (!Input.GetMouseButton(1))
+            {
+                sword.col.enabled = true;
+                cc.isAttacking = true;
+                Invoke(nameof(AttackEnd), 1.2f);
+
+            }
         }
+
         
 
         public virtual void AttackEnd()
