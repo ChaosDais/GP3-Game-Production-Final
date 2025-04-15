@@ -12,6 +12,7 @@ TagManager:
   - Interact
   - ArcaneSoul
   - Graphook
+  - Lever
   layers:
   - Default
   - TransparentFX
