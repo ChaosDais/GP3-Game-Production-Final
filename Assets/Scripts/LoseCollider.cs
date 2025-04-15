@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class LoseCollider : MonoBehaviour
 {
     public BoxCollider boxTriggerCollider;
-    void OnTriggerEnter(Collider COllider)
+    void OnTriggerEnter(Collider other)
     {
-        if (gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

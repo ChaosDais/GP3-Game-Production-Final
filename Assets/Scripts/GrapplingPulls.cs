@@ -11,8 +11,8 @@ public class GrapplingPulls : MonoBehaviour
     private Transform pulledObject;
     private Vector3 pullLocalPoint;
     public LayerMask whatIsPullable;
-    public Transform gunTip, camera, player;
-
+    public Transform gunTip,  player;
+    public new Transform camera;
     private float maxPullDistance = 100f;
     private Rigidbody pulledObjectRb;
     private Rigidbody playerRb;
