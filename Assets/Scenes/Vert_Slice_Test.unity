@@ -1117,6 +1117,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1302036587}
   m_SourcePrefab: {fileID: 100100000, guid: b7b039f7fe6a54b4f97a8614c830e748, type: 3}
+--- !u!114 &224566249 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6454014740987413487, guid: e7fad52d9bf2ec64a918cc208466304e, type: 3}
+  m_PrefabInstance: {fileID: 1560083462}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &234388374
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5023,7 +5034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7465512861413030743, guid: 27c3ee6de025d314fbef0676dbfc35de, type: 3}
       propertyPath: defaultDistance
-      value: 7
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 7465512861413030743, guid: 27c3ee6de025d314fbef0676dbfc35de, type: 3}
       propertyPath: xMouseSensitivity
@@ -7230,6 +7241,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3690350583063793446, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3837068945904348574, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
       propertyPath: m_Name
       value: Thief Variant
@@ -7242,6 +7257,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1035518132}
+    - target: {fileID: 4931135699425380372, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
+      propertyPath: reticle
+      value: 
+      objectReference: {fileID: 224566249}
     - target: {fileID: 7656936612636347209, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
       propertyPath: camera
       value: 
