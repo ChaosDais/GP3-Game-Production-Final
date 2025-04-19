@@ -688,6 +688,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b47840efa422be3419801ea9cb857e61, type: 3}
+--- !u!4 &512623972 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 108537672987216426, guid: 27c3ee6de025d314fbef0676dbfc35de, type: 3}
+  m_PrefabInstance: {fileID: 641663805}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &641663805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -744,6 +749,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1467342854}
+    - target: {fileID: 7465512861413030743, guid: 27c3ee6de025d314fbef0676dbfc35de, type: 3}
+      propertyPath: defaultDistance
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8837806578506343905, guid: 27c3ee6de025d314fbef0676dbfc35de, type: 3}
       propertyPath: m_Name
       value: vThirdPersonCamera_LITE
@@ -983,6 +992,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1693577396412440340, guid: e7fad52d9bf2ec64a918cc208466304e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -120
+      objectReference: {fileID: 0}
+    - target: {fileID: 1693577396412440340, guid: e7fad52d9bf2ec64a918cc208466304e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -17.8
+      objectReference: {fileID: 0}
     - target: {fileID: 2770758734360587928, guid: e7fad52d9bf2ec64a918cc208466304e, type: 3}
       propertyPath: m_Name
       value: Game UI
@@ -1750,6 +1767,14 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 902103642}
+    - target: {fileID: 1837331172910982567, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
+      propertyPath: pullTargetPoint
+      value: 
+      objectReference: {fileID: 512623972}
+    - target: {fileID: 1837331172910982567, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
+      propertyPath: pullStopDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2364907061319494456, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.93
@@ -1798,6 +1823,22 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 902103642}
+    - target: {fileID: 4931135699425380372, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
+      propertyPath: defaultColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931135699425380372, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
+      propertyPath: defaultColor.b
+      value: 0.28657886
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931135699425380372, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
+      propertyPath: defaultColor.g
+      value: 0.28657886
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931135699425380372, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
+      propertyPath: defaultColor.r
+      value: 0.3773585
+      objectReference: {fileID: 0}
     - target: {fileID: 7656936612636347209, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
       propertyPath: camera
       value: 
