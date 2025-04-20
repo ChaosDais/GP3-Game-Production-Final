@@ -83,7 +83,7 @@ public class FlyingEnemyBehavior : DamageableCharacter
             
             if (projectile.TryGetComponent<Rigidbody>(out Rigidbody rb))
             {
-                rb.AddForce(direction * 50f, ForceMode.Impulse);
+                rb.AddForce(direction * 100f, ForceMode.Impulse);
             }
         }
     }
