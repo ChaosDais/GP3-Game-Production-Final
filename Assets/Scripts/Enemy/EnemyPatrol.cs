@@ -4,12 +4,13 @@ using UnityEngine.AI;
 public class EnemyPatrol : DamageableCharacter
 {
     public Transform[] patrolPoints;
-    
+
     public float chaseRadius = 10f;
 
     private NavMeshAgent agent;
     private int currentPatrolIndex = 0;
     private bool isChasing = false;
+    private Animator animator;
     Transform player;
 
     public override void Start()
@@ -18,11 +19,26 @@ public class EnemyPatrol : DamageableCharacter
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         PatrolNextPoint();
     }
 
     void Update()
     {
+        
+        bool isAttacking = animator.GetBool("IsAttacking");
+
+       
+        if (isAttacking)
+        {
+            agent.isStopped = true;
+            return;
+        }
+        else
+        {
+            agent.isStopped = false;
+        }
+
         float distanceToPlayer = Vector3.Distance(player.position, transform.position);
 
         if (distanceToPlayer <= chaseRadius)
