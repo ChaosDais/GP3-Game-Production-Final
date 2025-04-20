@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game UI
       objectReference: {fileID: 0}
+    - target: {fileID: 4390449304308670626, guid: e7fad52d9bf2ec64a918cc208466304e, type: 3}
+      propertyPath: gameUI
+      value: 
+      objectReference: {fileID: 4666945}
     - target: {fileID: 4617939738285281323, guid: e7fad52d9bf2ec64a918cc208466304e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -223,6 +227,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7fad52d9bf2ec64a918cc208466304e, type: 3}
+--- !u!1 &4666945 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1081428013005963192, guid: e7fad52d9bf2ec64a918cc208466304e, type: 3}
+  m_PrefabInstance: {fileID: 4666944}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &42171993
 GameObject:
   m_ObjectHideFlags: 0
