@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class GhostStep : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        print("Ghost Step!");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        print("Ghost Step active!");
     }
 }

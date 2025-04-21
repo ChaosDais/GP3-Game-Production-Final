@@ -8,17 +8,16 @@ public class Attack : MonoBehaviour
 {
     public int damage = 5;
     public bool playerSourced = false;
+    public bool temporary = false;
 
     [HideInInspector] public Collider col;
-    vThirdPersonInput input;
 
-    void Start()
+    public virtual void Start()
     {
-        col = GetComponent<BoxCollider>();
-        input = GameObject.FindWithTag("Player").GetComponent<vThirdPersonInput>();
+        col = GetComponent<Collider>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerEnter(Collider other)
     {
             DamageableCharacter damageable = other.gameObject.GetComponent<DamageableCharacter>();
             if (damageable && other.gameObject.CompareTag("Player") && !playerSourced)
