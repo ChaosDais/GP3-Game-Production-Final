@@ -3261,6 +3261,10 @@ PrefabInstance:
       value: 0.3773585
       objectReference: {fileID: 0}
     - target: {fileID: 5136813165287916624, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
+      propertyPath: freeSpeed.walkSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5136813165287916624, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
       propertyPath: freeSpeed.movementSmooth
       value: 10
       objectReference: {fileID: 0}
