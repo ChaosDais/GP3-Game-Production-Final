@@ -520,9 +520,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3983563404872301176}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.64235646, z: -0, w: 0.7664061}
+  m_LocalRotation: {x: 0, y: 0.6423597, z: 0, w: 0.7664034}
   m_LocalPosition: {x: -32.666035, y: 3.7401001, z: 61.688953}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5901445, y: 1.5901445, z: 1.5901445}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5687547372110983907}
@@ -613,11 +613,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 10
-  attackCooldown: 2
-  projectilePrefab: {fileID: 949144878976204137, guid: 9488b8eb193ef83448179f7dbe2f116d, type: 3}
+  attackCooldown: 5
+  projectilePrefab: {fileID: 8125268947362651853, guid: 9488b8eb193ef83448179f7dbe2f116d, type: 3}
   projectileSpawnPoint: {fileID: 4022367910843363499}
-  projectileSpeed: 10
-  targetHeightOffset: 2.5
+  projectileSpeed: 30
+  targetHeightOffset: 2
 --- !u!54 &5538512191864650708
 Rigidbody:
   m_ObjectHideFlags: 0
