@@ -613,11 +613,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 10
-  attackCooldown: 2
-  projectilePrefab: {fileID: 949144878976204137, guid: 9488b8eb193ef83448179f7dbe2f116d, type: 3}
+  attackCooldown: 5
+  projectilePrefab: {fileID: 8125268947362651853, guid: 9488b8eb193ef83448179f7dbe2f116d, type: 3}
   projectileSpawnPoint: {fileID: 4022367910843363499}
-  projectileSpeed: 10
-  targetHeightOffset: 2.5
+  projectileSpeed: 30
+  targetHeightOffset: 2
 --- !u!54 &5538512191864650708
 Rigidbody:
   m_ObjectHideFlags: 0
