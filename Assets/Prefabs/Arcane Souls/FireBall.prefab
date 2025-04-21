@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fast Dash
+  m_text: Fireball
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 3667939242647979094}
   - component: {fileID: 7548565775907579968}
   m_Layer: 2
-  m_Name: FastDash
+  m_Name: FireBall
   m_TagString: ArcaneSoul
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -419,7 +419,7 @@ MonoBehaviour:
   promptCanvas: {fileID: 4544930170030736715}
   smoothSpeed: 5
   interactKey: 101
-  abilityName: FastDash
+  abilityName: FireBall
 --- !u!114 &3667939242647979094
 MonoBehaviour:
   m_ObjectHideFlags: 0

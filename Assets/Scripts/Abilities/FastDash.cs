@@ -11,29 +11,32 @@ public class FastDash : MonoBehaviour
     public AudioSource dashSound;
 
     private float dashCDCurrent;
-    [SerializeField] vThirdPersonInput input;
-    [SerializeField] Transform playerTransform;
-    [SerializeField] Rigidbody body;
-    [SerializeField] bool canDash = true;
+    vThirdPersonInput input;
+    Transform playerTransform;
+    Rigidbody body;
+    bool canDash = true;
 
     void Start()
     {
-        print("Dash acquired!");
-
         input = gameObject.GetComponent<vThirdPersonInput>();
         body = gameObject.GetComponent<Rigidbody>();
         playerTransform = gameObject.transform;
         dashCDCurrent = dashCooldown;
     }
 
+    private void OnEnable()
+    {
+        print("Fast Dash active!");
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && canDash)
+        if (Input.GetKeyDown(input.abilityInput) && canDash)
         {
             print("Dash!");
             StartCoroutine(Dash());
         }
-        else if (Input.GetKeyDown(KeyCode.F)){
+        else if (Input.GetKeyDown(input.abilityInput)){
             print("Can't dash yet!");
         }
     }
