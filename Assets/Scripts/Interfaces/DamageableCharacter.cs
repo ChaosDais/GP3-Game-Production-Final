@@ -57,6 +57,7 @@ public class DamageableCharacter : MonoBehaviour
     public bool dropsAbility = false;
 
     [HideInInspector] public Rigidbody rb;
+    private Animator animator;
 
     public UnityEvent OnDestroyEvents;
 
@@ -70,6 +71,7 @@ public class DamageableCharacter : MonoBehaviour
     public virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
         Targetable = targetable;
         health = maxHealth;
     }
@@ -87,12 +89,23 @@ public class DamageableCharacter : MonoBehaviour
 
     public virtual void RemoveCharacter()
     {
+        StartCoroutine(DeathSequence());
+    }
+
+    private IEnumerator DeathSequence()
+    {
         OnDestroyEvents.Invoke(); // Invoke any special events when destroyed
+
+        // Set death animation
+        if (animator != null)
+        {
+            animator.SetBool("IsDead", true);
+        }
 
         if (dropsAbility)
         {
-            Vector3 spawn = new(transform.position.x + Random.Range(-spawnOffset, spawnOffset), 
-                transform.position.y + Random.Range(0, spawnOffset), 
+            Vector3 spawn = new(transform.position.x + Random.Range(-spawnOffset, spawnOffset),
+                transform.position.y + Random.Range(0, spawnOffset),
                 transform.position.z + Random.Range(-spawnOffset, spawnOffset));
             GameObject arcaneSoul = Instantiate(abilityDrop, spawn, Quaternion.identity); // Spawns arcane soul
             Debug.Log("Created " + arcaneSoul.name);
@@ -100,6 +113,10 @@ public class DamageableCharacter : MonoBehaviour
             arcaneSoul.GetComponent<Rigidbody>().AddExplosionForce(dropForce, transform.position - transform.up, 5); // Applies pop force
         }
 
+        // Wait for animation
+        yield return new WaitForSeconds(2f);
+
+        // Destroy the game object
         Destroy(gameObject);
     }
 
