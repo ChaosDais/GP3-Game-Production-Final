@@ -2473,6 +2473,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1953184563}
     m_Modifications:
+    - target: {fileID: 6059528037969976065, guid: de02d847dd28b4143816f05fe9f7a667, type: 3}
+      propertyPath: m_Name
+      value: largest_room_ceiling_02 (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 6871389163754095035, guid: de02d847dd28b4143816f05fe9f7a667, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.999998
@@ -2512,10 +2516,6 @@ PrefabInstance:
     - target: {fileID: 6871389163754095035, guid: de02d847dd28b4143816f05fe9f7a667, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6059528037969976065, guid: de02d847dd28b4143816f05fe9f7a667, type: 3}
-      propertyPath: m_Name
-      value: largest_room_ceiling_02 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27126,15 +27126,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7966618499392198781, guid: 3ca884f07fe2dbb4ebe790245dbae640, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15
+      value: 15.169
       objectReference: {fileID: 0}
     - target: {fileID: 7966618499392198781, guid: 3ca884f07fe2dbb4ebe790245dbae640, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.016004
+      value: 14.016
       objectReference: {fileID: 0}
     - target: {fileID: 7966618499392198781, guid: 3ca884f07fe2dbb4ebe790245dbae640, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.3529997
+      value: 0.353
       objectReference: {fileID: 0}
     - target: {fileID: 7966618499392198781, guid: 3ca884f07fe2dbb4ebe790245dbae640, type: 3}
       propertyPath: m_LocalRotation.w
