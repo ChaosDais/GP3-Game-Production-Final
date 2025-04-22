@@ -543,7 +543,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 14462a1a971152c43839f4d7177eec68, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -600,6 +600,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   chaseRadius: 10
+  isRanged: 1
 --- !u!114 &2722704533847774645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -612,7 +613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87c9a2218d1f867409f18079dab0e2b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 10
+  attackRange: 15
   attackCooldown: 5
   projectilePrefab: {fileID: 8125268947362651853, guid: 9488b8eb193ef83448179f7dbe2f116d, type: 3}
   projectileSpawnPoint: {fileID: 4022367910843363499}
