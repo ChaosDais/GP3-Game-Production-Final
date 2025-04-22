@@ -10,7 +10,7 @@ public class FlyingEnemyBehavior : DamageableCharacter
     public float flyingHeight = 5f;
 
     [Header("Detection")]
-    public SphereCollider detectionZone;
+ 
     public float detectionRadius = 10f;
 
     [Header("Combat")]
@@ -24,7 +24,7 @@ public class FlyingEnemyBehavior : DamageableCharacter
     public override void Start()
     {
         base.Start();
-       
+
         agent = GetComponent<NavMeshAgent>();
         if (agent)
         {
@@ -32,13 +32,8 @@ public class FlyingEnemyBehavior : DamageableCharacter
             agent.height = 0.5f;
         }
 
-       
-        if (!detectionZone)
-        {
-            detectionZone = gameObject.AddComponent<SphereCollider>();
-            detectionZone.isTrigger = true;
-            detectionZone.radius = detectionRadius;
-        }
+
+      
 
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         shootingTimer = shootingInterval;
@@ -48,7 +43,7 @@ public class FlyingEnemyBehavior : DamageableCharacter
     {
         if (player == null) return;
 
-        
+
         Vector3 targetPosition = transform.position;
         targetPosition.y = flyingHeight;
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 5f);
@@ -57,7 +52,7 @@ public class FlyingEnemyBehavior : DamageableCharacter
         {
             transform.LookAt(player);
 
-            
+
             shootingTimer -= Time.deltaTime;
             if (shootingTimer <= 0)
             {
@@ -65,7 +60,7 @@ public class FlyingEnemyBehavior : DamageableCharacter
                 shootingTimer = shootingInterval;
             }
 
-           
+
             if (agent)
             {
                 agent.SetDestination(player.position);
@@ -80,7 +75,7 @@ public class FlyingEnemyBehavior : DamageableCharacter
             Vector3 direction = (player.position - transform.position).normalized;
             GameObject projectile = Instantiate(projectilePrefab, transform.position + direction, Quaternion.LookRotation(direction));
 
-            
+
             if (projectile.TryGetComponent<Rigidbody>(out Rigidbody rb))
             {
                 rb.AddForce(direction * 100f, ForceMode.Impulse);
