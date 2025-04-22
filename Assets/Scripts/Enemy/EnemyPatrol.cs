@@ -38,6 +38,7 @@ public class EnemyPatrol : DamageableCharacter
         }
         else
         {
+            animator.SetBool("IsIdle", false);
             agent.isStopped = false;
         }
 
