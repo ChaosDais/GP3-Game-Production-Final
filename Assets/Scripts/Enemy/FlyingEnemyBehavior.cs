@@ -13,7 +13,6 @@ public class FlyingEnemyBehavior : DamageableCharacter
 
     [Header("Detection")]
     public float detectionRadius = 10f;
-    public string targetTag = "PlayerCore"; // Tag of the object to chase/explode near
 
     [Header("Combat")]
     public bool isRanged = true; // Toggle between ranged and melee
@@ -36,7 +35,7 @@ public class FlyingEnemyBehavior : DamageableCharacter
         base.Start();
 
         randomTarget = GetRandomWanderPoint();
-        player = GameObject.FindGameObjectWithTag(targetTag)?.transform;
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
         shootingTimer = shootingInterval;
     }
 
@@ -140,7 +139,7 @@ public class FlyingEnemyBehavior : DamageableCharacter
         foreach (var hitCollider in hitColliders)
         {
             DamageableCharacter playerHealth = hitCollider.gameObject.GetComponent<DamageableCharacter>();
-            if (playerHealth != null && hitCollider.gameObject.CompareTag(targetTag))
+            if (playerHealth != null && hitCollider.gameObject.CompareTag("Player"))
             {
                 // Deal damage to player
                 playerHealth.OnHit(5); //
