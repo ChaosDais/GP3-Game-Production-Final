@@ -34,6 +34,10 @@ public class TurretBehavior : MonoBehaviour
     [Header("Line Renderer")]
     [SerializeField] private LineRenderer lineRenderer;
 
+    [Header("Damage Sphere")]
+    [SerializeField] private GameObject damageSphere;
+    [SerializeField] private float sphereRadius = 0.5f;
+
     private void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
@@ -43,9 +47,39 @@ public class TurretBehavior : MonoBehaviour
             Debug.LogWarning("no player Tag!.");
         }
 
+        // Create damage sphere if it doesn't exist
+        if (damageSphere == null)
+        {
+            damageSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            damageSphere.transform.localScale = Vector3.one * sphereRadius * 2;
+
+            // Remove the mesh renderer to make it invisible
+            Destroy(damageSphere.GetComponent<MeshRenderer>());
+
+            // Make sure it's a trigger
+            damageSphere.GetComponent<SphereCollider>().isTrigger = true;
+
+            // Add the damage trigger script
+            damageSphere.AddComponent<DamageTrigger>();
+        }
+
         // Rotation for the head and 
         currentBodyRotation = bodyTransform.localEulerAngles.z;
         currentHeadRotation = headTransform.localEulerAngles.x;
+    }
+
+    public void OnSphereHitPlayer(Collider playerCollider)
+    {
+        // Apply damage every seconds depending on interval time
+        if (Time.time - lastDamageTime >= damageInterval)
+        {
+            var damageable = playerCollider.GetComponent<DamageableCharacter>();
+            if (damageable != null)
+            {
+                damageable.OnHit(laserDamage);
+            }
+            lastDamageTime = Time.time;
+        }
     }
 
     private void Update()
@@ -97,20 +131,7 @@ public class TurretBehavior : MonoBehaviour
                 {
                     rayEnd = raycastHitInfo.point;
 
-                    // This checks if player is hit
-                    if (raycastHitInfo.collider.CompareTag("Player"))
-                    {
-                        // Apply damage every seconds depending on interval time
-                        if (Time.time - lastDamageTime >= damageInterval)
-                        {
-                            var damageable = raycastHitInfo.collider.GetComponent<DamageableCharacter>();
-                            if (damageable != null)
-                            {
-                                damageable.OnHit(laserDamage);
-                            }
-                            lastDamageTime = Time.time;
-                        }
-                    }
+                    // We no longer need to check for player hit here since the sphere collider handles that
                 }
 
                 if (lineRenderer != null)
@@ -123,6 +144,13 @@ public class TurretBehavior : MonoBehaviour
                     currentLaserEnd = Vector3.Lerp(currentLaserEnd, rayEnd, Time.deltaTime * laserLerpSpeed);
                     lineRenderer.SetPosition(0, rayStart);
                     lineRenderer.SetPosition(1, currentLaserEnd);
+
+                    // Update damage sphere position
+                    if (damageSphere != null)
+                    {
+                        damageSphere.transform.position = currentLaserEnd;
+                        damageSphere.SetActive(true);
+                    }
                 }
             }
             else
@@ -131,6 +159,10 @@ public class TurretBehavior : MonoBehaviour
                 if (lineRenderer != null)
                 {
                     lineRenderer.enabled = false;
+                }
+                if (damageSphere != null)
+                {
+                    damageSphere.SetActive(false);
                 }
                 currentLaserEnd = Vector3.zero; // Reset laser end so that it doesnt stay there on reactivation
             }

@@ -127,15 +127,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3719423112809925719, guid: fccc7f9c7c44c6843b2af3ee6d2f2ee7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.9398627
+      value: -37.888977
       objectReference: {fileID: 0}
     - target: {fileID: 3719423112809925719, guid: fccc7f9c7c44c6843b2af3ee6d2f2ee7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.003578186
+      value: 3.740099
       objectReference: {fileID: 0}
     - target: {fileID: 3719423112809925719, guid: fccc7f9c7c44c6843b2af3ee6d2f2ee7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -56.177567
+      value: 66.10801
       objectReference: {fileID: 0}
     - target: {fileID: 3719423112809925719, guid: fccc7f9c7c44c6843b2af3ee6d2f2ee7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -256,6 +256,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   chaseRadius: 10
+  isRanged: 0
 --- !u!114 &8538659545505136275
 MonoBehaviour:
   m_ObjectHideFlags: 0
