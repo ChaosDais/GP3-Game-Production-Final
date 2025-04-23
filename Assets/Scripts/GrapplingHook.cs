@@ -214,11 +214,11 @@ public class GrapplingHook : MonoBehaviour
         lr.SetPosition(0, gunTip.position);
         lr.SetPosition(1, currentGrapplePosition);
 
-        // Update grappling hook object position along the rope
+       
         if (grappleHookObject != null && isGrappling)
         {
             grappleHookObject.transform.position = currentGrapplePosition;
-            // Make the hook look at the grapple point
+            
             grappleHookObject.transform.LookAt(grapplePoint);
         }
     }

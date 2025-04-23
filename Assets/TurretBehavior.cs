@@ -46,6 +46,7 @@ public class TurretBehavior : MonoBehaviour
         {
             Debug.LogWarning("no player Tag!.");
         }
+  
 
         // Create damage sphere if it doesn't exist
         if (damageSphere == null)
@@ -53,13 +54,13 @@ public class TurretBehavior : MonoBehaviour
             damageSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             damageSphere.transform.localScale = Vector3.one * sphereRadius * 2;
 
-            // Remove the mesh renderer to make it invisible
+            // makes the sphere invisible
             Destroy(damageSphere.GetComponent<MeshRenderer>());
 
-            // Make sure it's a trigger
+            // this will make sure that the newly created trigger sphere has a true trigger.
             damageSphere.GetComponent<SphereCollider>().isTrigger = true;
 
-            // Add the damage trigger script
+            //made a new script for just the chip damage
             damageSphere.AddComponent<DamageTrigger>();
         }
 
@@ -111,11 +112,10 @@ public class TurretBehavior : MonoBehaviour
             Time.deltaTime * rotationSpeed
         );
 
-        // Apply rotations
         bodyTransform.localRotation = Quaternion.Euler(0, 0, currentBodyRotation);
         headTransform.localRotation = Quaternion.Euler(currentHeadRotation, 0, 0);
 
-        // Raycast toward player from rayOriginTransform only if within 10 units
+      
         if (rayOriginTransform != null && playerTransform != null)
         {
             float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
@@ -125,27 +125,27 @@ public class TurretBehavior : MonoBehaviour
                 Vector3 rayStart = rayOriginTransform.position;
                 Vector3 rayEnd = rayStart + rayDirection * rayDistance;
 
-                // Perform the raycast
+             
                 bool hit = Physics.Raycast(rayStart, rayDirection, out raycastHitInfo, rayDistance, raycastLayerMask);
                 if (hit)
                 {
                     rayEnd = raycastHitInfo.point;
 
-                    // We no longer need to check for player hit here since the sphere collider handles that
+                    
                 }
 
                 if (lineRenderer != null)
                 {
                     lineRenderer.enabled = true;
                     lineRenderer.positionCount = 2;
-                    // Smoothly lerp the end of the laser toward the target
+                    
                     if (currentLaserEnd == Vector3.zero)
-                        currentLaserEnd = rayStart; // Initialize on first use
+                        currentLaserEnd = rayStart; 
                     currentLaserEnd = Vector3.Lerp(currentLaserEnd, rayEnd, Time.deltaTime * laserLerpSpeed);
                     lineRenderer.SetPosition(0, rayStart);
                     lineRenderer.SetPosition(1, currentLaserEnd);
 
-                    // Update damage sphere position
+                   
                     if (damageSphere != null)
                     {
                         damageSphere.transform.position = currentLaserEnd;
@@ -155,7 +155,6 @@ public class TurretBehavior : MonoBehaviour
             }
             else
             {
-                // turn off the line renderer if player oto far
                 if (lineRenderer != null)
                 {
                     lineRenderer.enabled = false;
@@ -164,7 +163,7 @@ public class TurretBehavior : MonoBehaviour
                 {
                     damageSphere.SetActive(false);
                 }
-                currentLaserEnd = Vector3.zero; // Reset laser end so that it doesnt stay there on reactivation
+                currentLaserEnd = Vector3.zero; 
             }
         }
     }
