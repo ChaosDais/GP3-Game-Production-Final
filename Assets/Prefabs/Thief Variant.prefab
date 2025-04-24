@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Thief Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 971218175381405060, guid: dc199a6883cd0c24292d1bcebadfd0e5, type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 971218175381405060, guid: dc199a6883cd0c24292d1bcebadfd0e5, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 981089585610774833, guid: dc199a6883cd0c24292d1bcebadfd0e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -34,15 +42,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2196230476283575599, guid: dc199a6883cd0c24292d1bcebadfd0e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.8
+      value: 15.619
       objectReference: {fileID: 0}
     - target: {fileID: 2196230476283575599, guid: dc199a6883cd0c24292d1bcebadfd0e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.38
       objectReference: {fileID: 0}
     - target: {fileID: 2196230476283575599, guid: dc199a6883cd0c24292d1bcebadfd0e5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.54
+      value: -27.208
       objectReference: {fileID: 0}
     - target: {fileID: 2196230476283575599, guid: dc199a6883cd0c24292d1bcebadfd0e5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -87,6 +95,22 @@ PrefabInstance:
     - target: {fileID: 6118600573548322142, guid: dc199a6883cd0c24292d1bcebadfd0e5, type: 3}
       propertyPath: grappleSpeed
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8782834912249991751, guid: dc199a6883cd0c24292d1bcebadfd0e5, type: 3}
+      propertyPath: freeSpeed.walkSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8782834912249991751, guid: dc199a6883cd0c24292d1bcebadfd0e5, type: 3}
+      propertyPath: freeSpeed.sprintSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8782834912249991751, guid: dc199a6883cd0c24292d1bcebadfd0e5, type: 3}
+      propertyPath: freeSpeed.runningSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8782834912249991751, guid: dc199a6883cd0c24292d1bcebadfd0e5, type: 3}
+      propertyPath: freeSpeed.movementSmooth
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8846666438018686467, guid: dc199a6883cd0c24292d1bcebadfd0e5, type: 3}
       propertyPath: defaultColor.a
@@ -139,6 +163,7 @@ MonoBehaviour:
   dashTime: 1
   dashCooldown: 0.1
   dashSound: {fileID: 0}
+  cooldownMeter: {fileID: 0}
 --- !u!114 &1060363731126910399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,6 +181,8 @@ MonoBehaviour:
   projectileSpeed: 100
   projectileLifetime: 3
   spawnPoint: {fileID: 6833230665956595226}
+  fireballSound: {fileID: 0}
+  cooldownMeter: {fileID: 0}
 --- !u!114 &6102137553500737607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +195,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c95102583c3f24943b80afd4ca56b661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownMeter: {fileID: 0}
+  activateSound: {fileID: 0}
+  deactivateSound: {fileID: 0}
+  cooldown: 5
+  duration: 5
+  hidden: 0
 --- !u!4 &6833230665956595226 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6953494723329785869, guid: dc199a6883cd0c24292d1bcebadfd0e5, type: 3}
