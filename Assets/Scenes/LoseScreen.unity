@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 4
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -895,7 +895,7 @@ PrefabInstance:
     - target: {fileID: 2030451064936582966, guid: 99ae58bf7c5d55948a02e73049997d17, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1433a360d6b27c647afc24297baca396, type: 3}
+      objectReference: {fileID: 21300000, guid: 29c45e04d44a4b340a92c51a0543bac7, type: 3}
     - target: {fileID: 5247939196726280510, guid: 99ae58bf7c5d55948a02e73049997d17, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1213,7 +1213,7 @@ PrefabInstance:
     - target: {fileID: 7564348033221694632, guid: 6c701624c56459e409f93a306ccb6de5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d963ba5a4940ca849b9bfc34838e08e5, type: 3}
+      objectReference: {fileID: 21300000, guid: e63d3205c3dd3744893d97696a379673, type: 3}
     - target: {fileID: 8221905208165534035, guid: 6c701624c56459e409f93a306ccb6de5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
