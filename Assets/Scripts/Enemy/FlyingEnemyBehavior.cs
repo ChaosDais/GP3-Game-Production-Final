@@ -26,7 +26,7 @@ public class FlyingEnemyBehavior : DamageableCharacter
     private float meleeAttackRange = 3f;
     private float meleeDamageRadius = 6f;
     private bool hasDealtMeleeDamage = false;
-
+    GhostStep visibility;
     private Transform player;
     private bool playerInRange;
 
@@ -37,6 +37,7 @@ public class FlyingEnemyBehavior : DamageableCharacter
         randomTarget = GetRandomWanderPoint();
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         shootingTimer = shootingInterval;
+        visibility = player.GetComponent<GhostStep>();
     }
 
     void Update()
@@ -45,7 +46,7 @@ public class FlyingEnemyBehavior : DamageableCharacter
 
         // Vector math detection
         float distToPlayer = Vector3.Distance(transform.position, player.position);
-        playerInRange = distToPlayer <= detectionRadius;
+        playerInRange = distToPlayer <= detectionRadius && !visibility.hidden;
 
         Vector3 targetPosition = transform.position;
         targetPosition.y = flyingHeight;

@@ -590,12 +590,12 @@ MonoBehaviour:
   health: 10
   targetable: 1
   isPlayer: 0
-  dropsAbility: 0
+  dropsAbility: 1
   rb: {fileID: 0}
   OnDestroyEvents:
     m_PersistentCalls:
       m_Calls: []
-  abilityDrop: {fileID: 0}
+  abilityDrop: {fileID: 4606829459511083081, guid: f37e30a605088234b830e02b63d24a6e, type: 3}
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}

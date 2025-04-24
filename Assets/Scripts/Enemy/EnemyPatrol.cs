@@ -14,6 +14,7 @@ public class EnemyPatrol : DamageableCharacter
     private bool isInRange = false; // Track if player is in detection range
     private Animator animator;
     Transform player;
+    GhostStep visibility;
 
     public override void Start()
     {
@@ -22,6 +23,7 @@ public class EnemyPatrol : DamageableCharacter
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        visibility = player.GetComponent<GhostStep>();
         PatrolNextPoint();
     }
 
@@ -44,7 +46,8 @@ public class EnemyPatrol : DamageableCharacter
 
         float distanceToPlayer = Vector3.Distance(player.position, transform.position);
         bool wasInRange = isInRange;
-        isInRange = distanceToPlayer <= chaseRadius;
+        
+        isInRange = distanceToPlayer <= chaseRadius && !visibility.hidden;
 
         if (isInRange)
         {
