@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class DamageableCharacter : MonoBehaviour
 {
@@ -39,6 +40,7 @@ public class DamageableCharacter : MonoBehaviour
                 {
                     Debug.Log("Player died!");
                     canMove = false;
+                    SceneManager.LoadScene("LoseScreen");
                 }
             }
         }
