@@ -22639,6 +22639,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1060363731126910399, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
+      propertyPath: fireCooldown
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1837331172910982567, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
       propertyPath: camera
       value: 
@@ -22702,6 +22706,10 @@ PrefabInstance:
     - target: {fileID: 5136813165287916624, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
       propertyPath: freeSpeed.walkSpeed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5136813165287916624, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
+      propertyPath: freeSpeed.sprintSpeed
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5136813165287916624, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
       propertyPath: freeSpeed.runningSpeed
@@ -23127,6 +23135,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 2045582231}
+    - target: {fileID: 742067054515923467, guid: 1731209172cab614fb55e482029c0443, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 2633451751637127788, guid: 1731209172cab614fb55e482029c0443, type: 3}
       propertyPath: m_Name
       value: Game UI Variant
@@ -23215,22 +23227,6 @@ PrefabInstance:
       propertyPath: character
       value: 
       objectReference: {fileID: 967796710}
-    - target: {fileID: 5873038413176406201, guid: 1731209172cab614fb55e482029c0443, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 29c45e04d44a4b340a92c51a0543bac7, type: 3}
-    - target: {fileID: 7309345075317474477, guid: 1731209172cab614fb55e482029c0443, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 29c45e04d44a4b340a92c51a0543bac7, type: 3}
-    - target: {fileID: 7339359305196730289, guid: 1731209172cab614fb55e482029c0443, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 4c8fd0291b5e64641b04e71e98810f7c, type: 3}
-    - target: {fileID: 7485300589030767956, guid: 1731209172cab614fb55e482029c0443, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 29c45e04d44a4b340a92c51a0543bac7, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23317,6 +23313,18 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[1]
       value: 
       objectReference: {fileID: 1214388498}
+    - target: {fileID: 5902920222152823410, guid: 229c27467ff427c46a0b35c56f434e75, type: 3}
+      propertyPath: health
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5902920222152823410, guid: 229c27467ff427c46a0b35c56f434e75, type: 3}
+      propertyPath: isPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5902920222152823410, guid: 229c27467ff427c46a0b35c56f434e75, type: 3}
+      propertyPath: maxHealth
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 5902920222152823410, guid: 229c27467ff427c46a0b35c56f434e75, type: 3}
       propertyPath: abilityDrop
       value: 
@@ -30047,7 +30055,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2787251220945863403, guid: bbdd808edcd56094098e39a41cca7059, type: 3}
       propertyPath: maxHealth
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2787251220945863403, guid: bbdd808edcd56094098e39a41cca7059, type: 3}
       propertyPath: abilityDrop
