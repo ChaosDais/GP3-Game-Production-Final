@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class AbilitySteal : MonoBehaviour
 {
-    public TextMeshProUGUI abilityText;
+    public GameObject abilityUI;
     public enum Ability
     {
         None,
@@ -23,7 +23,6 @@ public class AbilitySteal : MonoBehaviour
     {
         currentAbility = Ability.None;
         newAbility = currentAbility;
-        abilityText.text = currentAbility.ToString();
 
         gameObject.GetComponent<FastDash>().enabled = false;
         gameObject.GetComponent<FireBall>().enabled = false;
@@ -62,21 +61,22 @@ public class AbilitySteal : MonoBehaviour
     void AddProperAbility(Ability abil)
     {
         // Add the new ability's script to the player
-        //Debug.Log("Adding ability " + abil);
+        if(abil != Ability.None) abilityUI.transform.GetChild(3).gameObject.SetActive(false);
+
         switch (abil)
         {
             case Ability.FastDash:
-                abilityText.text = "Fast Dash";
+                abilityUI.transform.GetChild(0).gameObject.SetActive(true);
                 gameObject.GetComponent<FastDash>().enabled = true;
                 currentAbility = Ability.FastDash;
                 break;
             case Ability.FireBall:
-                abilityText.text = "Fireball";
+                abilityUI.transform.GetChild(1).gameObject.SetActive(true);
                 gameObject.GetComponent<FireBall>().enabled = true;
                 currentAbility = Ability.FireBall;
                 break;
             case Ability.GhostStep:
-                abilityText.text = "Ghost Step";
+                abilityUI.transform.GetChild(2).gameObject.SetActive(true);
                 gameObject.GetComponent<GhostStep>().enabled = true;
                 currentAbility = Ability.GhostStep;
                 break;
@@ -92,12 +92,15 @@ public class AbilitySteal : MonoBehaviour
         switch (currentAbility)
         {
             case Ability.FastDash:
+                abilityUI.transform.GetChild(0).gameObject.SetActive(false);
                 gameObject.GetComponent<FastDash>().enabled = false;
                 break;
             case Ability.FireBall:
+                abilityUI.transform.GetChild(1).gameObject.SetActive(false);
                 gameObject.GetComponent<FireBall>().enabled = false;
                 break;
             case Ability.GhostStep:
+                abilityUI.transform.GetChild(2).gameObject.SetActive(false);
                 gameObject.GetComponent<GhostStep>().enabled = false;
                 break;
             default:

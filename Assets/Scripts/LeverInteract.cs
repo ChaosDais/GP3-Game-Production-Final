@@ -7,7 +7,7 @@ using UnityEngine.Animations;
 public class LeverInteract : Interactable
 {
     [SerializeField] private Animator lever;
-    [SerializeField] private Animator bridge;
+    [SerializeField] private Animator target;
     Outline outline;
     
     // Start is called before the first frame update
@@ -48,7 +48,7 @@ public class LeverInteract : Interactable
     public void PullLever()
     {
         lever.SetBool("IsPulled", true);
-        bridge.SetBool("BridgeExpanded", true);
+        target.SetBool("IsActive", true);
     }
 
 }
