@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7165649575221179380}
   - component: {fileID: 5058239153024491102}
   - component: {fileID: 3414613637311909896}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: top_piece2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4065636142571553505}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: grapple_point 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 5380612214260016499}
   - component: {fileID: 3486735015823389166}
   - component: {fileID: 7538068716650728146}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: top_loop2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
