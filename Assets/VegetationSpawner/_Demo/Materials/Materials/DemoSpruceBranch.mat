@@ -14,12 +14,12 @@ Material:
   m_ValidKeywords:
   - EFFECT_BUMP
   - EFFECT_HUE_VARIATION
-  - GEOM_TYPE_LEAF
+  - GEOM_TYPE_BRANCH_DETAIL
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
