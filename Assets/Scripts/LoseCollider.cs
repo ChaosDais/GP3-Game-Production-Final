@@ -10,6 +10,7 @@ public class LoseCollider : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("jfkdsl");
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             SceneManager.LoadScene("LoseScreen");

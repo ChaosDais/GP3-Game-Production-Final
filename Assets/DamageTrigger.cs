@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class DamageTrigger : MonoBehaviour
 {
+    public TurretBehavior turret;
     public int turretDamage = 10;
     [SerializeField] private int laserDamage = 10;
     [SerializeField] private float damageInterval = 3f;

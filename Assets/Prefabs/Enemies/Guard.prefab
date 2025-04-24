@@ -161,8 +161,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 1
-  maxHealth: 10
-  health: 10
+  maxHealth: 30
+  health: 30
   targetable: 1
   isPlayer: 0
   dropsAbility: 0
@@ -175,6 +175,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   chaseRadius: 5
+  isRanged: 0
 --- !u!65 &6977138605363083379
 BoxCollider:
   m_ObjectHideFlags: 0

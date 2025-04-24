@@ -1,27 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Purchasing;
 using UnityEngine.SceneManagement;
 
 public class LoadWin : MonoBehaviour
 {
-    public BoxCollider boxTriggerCollider;
+    
+    public string[] requiredTomes = { "Courtyard", "Vault" };
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-
-
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player touched the win trigger and collected a tome!");
-            string currentScene = SceneManager.GetActiveScene().name;
+            CheckTomesAndLoadScene();
+        }
+    }
 
+    private void CheckTomesAndLoadScene()
+    {
+        if (GameManagers.Instance == null || GameManagers.Instance.playerData == null) return;
 
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+        bool hasAllTomes = true;
+        foreach (string tomeId in requiredTomes)
+        {
+            if (!GameManagers.Instance.playerData.tomesCollected.Contains(tomeId))
+            {
+                hasAllTomes = false;
+                break;
+            }
+        }
+
+        if (hasAllTomes)
+        {
             SceneManager.LoadScene("WinScreen");
-
         }
     }
 }

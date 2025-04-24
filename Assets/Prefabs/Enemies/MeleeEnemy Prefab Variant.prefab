@@ -242,8 +242,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 1
-  maxHealth: 10
-  health: 10
+  maxHealth: 30
+  health: 30
   targetable: 1
   isPlayer: 0
   dropsAbility: 0
@@ -294,6 +294,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 2
   attackCooldown: 3
+  damageAmount: 5
+  targetTag: Player
 --- !u!136 &2223283323876603209
 CapsuleCollider:
   m_ObjectHideFlags: 0

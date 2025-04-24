@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Crypt_Level.unity
     guid: ecca4e5519b29524ab496cc422b2de02
   - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: c4f545c63644e0849bd94827e7c13b80
+  - enabled: 1
     path: Assets/Scenes/MageVault.unity
     guid: 79e3b692af793fe4f970a00bfbcf1cc9
   - enabled: 1

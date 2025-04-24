@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0c5aa83730cf7814bbc5bfa38e44fece, type: 3}
       propertyPath: m_Name
-      value: orb_enemy_red
+      value: DashEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 4629498079376232187, guid: 0c5aa83730cf7814bbc5bfa38e44fece, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -164,8 +164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 1
-  maxHealth: 10
-  health: 10
+  maxHealth: 1
+  health: 1
   targetable: 1
   isPlayer: 0
   dropsAbility: 1

@@ -18,7 +18,10 @@ public class MenuNavagation : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-
+public void Credit()
+    {
+        SceneManager.LoadScene("Credits");
+    }
     public void QuitGame()
     {
         Application.Quit();

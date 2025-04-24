@@ -869,7 +869,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7230717321104774580
 RectTransform:
   m_ObjectHideFlags: 0
@@ -887,7 +887,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 65.6, y: -160.1}
+  m_AnchoredPosition: {x: 48.6, y: -153.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &363085275277007513
@@ -1413,6 +1413,10 @@ PrefabInstance:
     - target: {fileID: 381219531761890870, guid: e7fad52d9bf2ec64a918cc208466304e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 49.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 627137261302486783, guid: e7fad52d9bf2ec64a918cc208466304e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1647852355971701600, guid: e7fad52d9bf2ec64a918cc208466304e, type: 3}
       propertyPath: m_fontAsset

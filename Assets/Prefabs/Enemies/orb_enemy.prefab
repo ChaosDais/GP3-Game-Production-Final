@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 1
-  maxHealth: 10
-  health: 10
+  maxHealth: 1
+  health: 1
   targetable: 1
   isPlayer: 0
   dropsAbility: 0
