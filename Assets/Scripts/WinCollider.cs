@@ -28,7 +28,7 @@ public class WinCollider : MonoBehaviour
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            SceneManager.LoadScene("WinScreen");
+            SceneManager.LoadScene("PlayerHUB");
             Debug.Log("Player touched the win trigger and collected a tome!");
         }
     }
