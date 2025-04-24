@@ -10,26 +10,27 @@ public class WinCollider : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Player touched the win trigger and collected a tome!");
             string currentScene = SceneManager.GetActiveScene().name;
 
             // Save progress if not already saved
-            if (!GameManager.Instance.playerData.levelsCompleted.Contains(currentScene))
+            if (!GameManagers.Instance.playerData.levelsCompleted.Contains(currentScene))
             {
-                GameManager.Instance.playerData.levelsCompleted.Add(currentScene);
-                GameManager.Instance.SaveGame();
+                GameManagers.Instance.playerData.levelsCompleted.Add(currentScene);
+                GameManagers.Instance.SaveGame();
             }
 
             // Track collected tome if not already collected
-            if (!GameManager.Instance.playerData.tomesCollected.Contains(tomeID))
+            if (!GameManagers.Instance.playerData.tomesCollected.Contains(tomeID))
             {
-                GameManager.Instance.playerData.tomesCollected.Add(tomeID);
-                GameManager.Instance.SaveGame();
+                GameManagers.Instance.playerData.tomesCollected.Add(tomeID);
+                GameManagers.Instance.SaveGame();
             }
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             SceneManager.LoadScene("PlayerHUB");
-            Debug.Log("Player touched the win trigger and collected a tome!");
+            
         }
     }
 }

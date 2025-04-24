@@ -6,10 +6,13 @@ public class MeleeEnemy : MonoBehaviour
 {
     public float attackRange = 2f;         // Range at which enemy can attack
     public float attackCooldown = 3f;      // Cooldown between attacks in seconds
+    public int damageAmount = 5;        // Amount of damage to deal
+    public string targetTag = "Player";     // Tag of objects to damage
 
     private float nextAttackTime;          // Time when next attack is allowed
     private Animator animator;             // Reference to the animator component
     private Transform player;              // Reference to the player's transform
+    private SphereCollider attackCollider; // Reference to the sphere collider for attacks
 
     void Start()
     {
@@ -17,10 +20,16 @@ public class MeleeEnemy : MonoBehaviour
         animator = GetComponent<Animator>();
 
         // Find the player object
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag(targetTag)?.transform;
 
         // Initialize next attack time
         nextAttackTime = 0f;
+
+        // Setup attack collider
+        attackCollider = gameObject.AddComponent<SphereCollider>();
+        attackCollider.radius = attackRange;
+        attackCollider.isTrigger = true;
+        attackCollider.enabled = false; // Only enable during attacks
     }
 
     void Update()
@@ -50,6 +59,23 @@ public class MeleeEnemy : MonoBehaviour
     {
         // Set attack animation state to true
         animator.SetBool("IsAttacking", true);
+
+        // Enable the attack collider
+        attackCollider.enabled = true;
+
+        // Check for hits
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
+        foreach (Collider hitCollider in hitColliders)
+        {
+            DamageableCharacter playerHealth = hitCollider.gameObject.GetComponent<DamageableCharacter>();
+            if (playerHealth != null && hitCollider.gameObject.CompareTag(targetTag))
+            {
+                playerHealth.OnHit(damageAmount);
+            }
+        }
+
+        // Disable the attack collider after checking
+        attackCollider.enabled = false;
 
         // Set next attack time
         nextAttackTime = Time.time + attackCooldown;
