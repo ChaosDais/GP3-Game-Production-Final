@@ -34,6 +34,10 @@ public class TurretBehavior : MonoBehaviour
     [Header("Line Renderer")]
     [SerializeField] private LineRenderer lineRenderer;
 
+    [Header("Damage Sphere")]
+    [SerializeField] private GameObject damageSphere;
+    [SerializeField] private float sphereRadius = 0.5f;
+
     private void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
@@ -42,10 +46,41 @@ public class TurretBehavior : MonoBehaviour
         {
             Debug.LogWarning("no player Tag!.");
         }
+  
+
+        // Create damage sphere if it doesn't exist
+        if (damageSphere == null)
+        {
+            damageSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            damageSphere.transform.localScale = Vector3.one * sphereRadius * 2;
+
+            // makes the sphere invisible
+            Destroy(damageSphere.GetComponent<MeshRenderer>());
+
+            // this will make sure that the newly created trigger sphere has a true trigger.
+            damageSphere.GetComponent<SphereCollider>().isTrigger = true;
+
+            //made a new script for just the chip damage
+            damageSphere.AddComponent<DamageTrigger>();
+        }
 
         // Rotation for the head and 
         currentBodyRotation = bodyTransform.localEulerAngles.z;
         currentHeadRotation = headTransform.localEulerAngles.x;
+    }
+
+    public void OnSphereHitPlayer(Collider playerCollider)
+    {
+        // Apply damage every seconds depending on interval time
+        if (Time.time - lastDamageTime >= damageInterval)
+        {
+            var damageable = playerCollider.GetComponent<DamageableCharacter>();
+            if (damageable != null)
+            {
+                damageable.OnHit(laserDamage);
+            }
+            lastDamageTime = Time.time;
+        }
     }
 
     private void Update()
@@ -77,11 +112,10 @@ public class TurretBehavior : MonoBehaviour
             Time.deltaTime * rotationSpeed
         );
 
-        // Apply rotations
         bodyTransform.localRotation = Quaternion.Euler(0, 0, currentBodyRotation);
         headTransform.localRotation = Quaternion.Euler(currentHeadRotation, 0, 0);
 
-        // Raycast toward player from rayOriginTransform only if within 10 units
+      
         if (rayOriginTransform != null && playerTransform != null)
         {
             float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
@@ -91,48 +125,45 @@ public class TurretBehavior : MonoBehaviour
                 Vector3 rayStart = rayOriginTransform.position;
                 Vector3 rayEnd = rayStart + rayDirection * rayDistance;
 
-                // Perform the raycast
+             
                 bool hit = Physics.Raycast(rayStart, rayDirection, out raycastHitInfo, rayDistance, raycastLayerMask);
                 if (hit)
                 {
                     rayEnd = raycastHitInfo.point;
 
-                    // This checks if player is hit
-                    if (raycastHitInfo.collider.CompareTag("Player"))
-                    {
-                        // Apply damage every seconds depending on interval time
-                        if (Time.time - lastDamageTime >= damageInterval)
-                        {
-                            var damageable = raycastHitInfo.collider.GetComponent<DamageableCharacter>();
-                            if (damageable != null)
-                            {
-                                damageable.OnHit(laserDamage);
-                            }
-                            lastDamageTime = Time.time;
-                        }
-                    }
+                    
                 }
 
                 if (lineRenderer != null)
                 {
                     lineRenderer.enabled = true;
                     lineRenderer.positionCount = 2;
-                    // Smoothly lerp the end of the laser toward the target
+                    
                     if (currentLaserEnd == Vector3.zero)
-                        currentLaserEnd = rayStart; // Initialize on first use
+                        currentLaserEnd = rayStart; 
                     currentLaserEnd = Vector3.Lerp(currentLaserEnd, rayEnd, Time.deltaTime * laserLerpSpeed);
                     lineRenderer.SetPosition(0, rayStart);
                     lineRenderer.SetPosition(1, currentLaserEnd);
+
+                   
+                    if (damageSphere != null)
+                    {
+                        damageSphere.transform.position = currentLaserEnd;
+                        damageSphere.SetActive(true);
+                    }
                 }
             }
             else
             {
-                // turn off the line renderer if player oto far
                 if (lineRenderer != null)
                 {
                     lineRenderer.enabled = false;
                 }
-                currentLaserEnd = Vector3.zero; // Reset laser end so that it doesnt stay there on reactivation
+                if (damageSphere != null)
+                {
+                    damageSphere.SetActive(false);
+                }
+                currentLaserEnd = Vector3.zero; 
             }
         }
     }
