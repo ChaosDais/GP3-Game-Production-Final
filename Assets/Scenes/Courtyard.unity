@@ -23135,13 +23135,13 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 2045582231}
+    - target: {fileID: 742067054515923467, guid: 1731209172cab614fb55e482029c0443, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 2633451751637127788, guid: 1731209172cab614fb55e482029c0443, type: 3}
       propertyPath: m_Name
       value: Game UI Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456701137555716539, guid: 1731209172cab614fb55e482029c0443, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4822906257714064607, guid: 1731209172cab614fb55e482029c0443, type: 3}
       propertyPath: m_Pivot.x
