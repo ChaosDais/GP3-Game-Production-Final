@@ -20,5 +20,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LoseScreen.unity
     guid: 7cfa01f3705dbf04ab3581de4507d1a4
+  - enabled: 1
+    path: Assets/Scenes/Crypt_Level.unity
+    guid: ecca4e5519b29524ab496cc422b2de02
+  - enabled: 1
+    path: Assets/Scenes/MageVault.unity
+    guid: 79e3b692af793fe4f970a00bfbcf1cc9
+  - enabled: 1
+    path: Assets/Scenes/Courtyard.unity
+    guid: 397e92aad21e7f94bb1782aaff791e9d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: b039297bf64f8ff43bd98db6a8292e4e, type: 3}

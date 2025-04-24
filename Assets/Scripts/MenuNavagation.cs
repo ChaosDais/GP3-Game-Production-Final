@@ -6,7 +6,7 @@ public class MenuNavagation : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("PlayerHUB");
     }
 
     public void HowToPlay()
