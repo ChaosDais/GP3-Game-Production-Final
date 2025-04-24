@@ -23318,6 +23318,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1214388498}
     - target: {fileID: 5902920222152823410, guid: 229c27467ff427c46a0b35c56f434e75, type: 3}
+      propertyPath: health
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5902920222152823410, guid: 229c27467ff427c46a0b35c56f434e75, type: 3}
+      propertyPath: isPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5902920222152823410, guid: 229c27467ff427c46a0b35c56f434e75, type: 3}
+      propertyPath: maxHealth
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5902920222152823410, guid: 229c27467ff427c46a0b35c56f434e75, type: 3}
       propertyPath: abilityDrop
       value: 
       objectReference: {fileID: 3876274213647491363, guid: 113e4d319d16bfd42aa55f62a09f5e74, type: 3}
@@ -30047,7 +30059,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2787251220945863403, guid: bbdd808edcd56094098e39a41cca7059, type: 3}
       propertyPath: maxHealth
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2787251220945863403, guid: bbdd808edcd56094098e39a41cca7059, type: 3}
       propertyPath: abilityDrop
