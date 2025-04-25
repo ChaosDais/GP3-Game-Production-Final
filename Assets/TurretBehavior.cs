@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class TurretBehavior : MonoBehaviour
@@ -14,6 +15,8 @@ public class TurretBehavior : MonoBehaviour
     private Vector3 targetDirection;
     private float currentBodyRotation;
     private float currentHeadRotation;
+    private float previousAngle;
+    private float totalRotation;
 
     [Header("Raycast Settings")]
     [SerializeField] private Transform rayOriginTransform;
@@ -46,7 +49,7 @@ public class TurretBehavior : MonoBehaviour
         {
             Debug.LogWarning("no player Tag!.");
         }
-  
+
 
         // Create damage sphere if it doesn't exist
         if (damageSphere == null)
@@ -67,6 +70,8 @@ public class TurretBehavior : MonoBehaviour
         // Rotation for the head and 
         currentBodyRotation = bodyTransform.localEulerAngles.z;
         currentHeadRotation = headTransform.localEulerAngles.x;
+        previousAngle = currentBodyRotation;
+        totalRotation = currentBodyRotation;
     }
 
     public void OnSphereHitPlayer(Collider playerCollider)
@@ -82,16 +87,28 @@ public class TurretBehavior : MonoBehaviour
             lastDamageTime = Time.time;
         }
     }
+    public int uprotation = 60;
 
     private void Update()
     {
+
+
         if (playerTransform == null) return;
 
         // Get direction to player
         targetDirection = playerTransform.position - transform.position;
 
-        // Calculate target rotations
-        float targetBodyRotation = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
+        // Calculate target rotation based on direction to player
+        Vector3 rayDirection = (playerTransform.position - rayOriginTransform.position);
+        float targetBodyRotation = Mathf.Atan2(rayDirection.y, rayDirection.x) * Mathf.Rad2Deg;
+
+        // Ensure continuous rotation beyond 360 degrees
+        float angleDelta = Mathf.DeltaAngle(previousAngle, targetBodyRotation);
+        totalRotation = Mathf.Clamp(totalRotation + angleDelta, 0f, 720f);
+        previousAngle = targetBodyRotation;
+
+        // Use the total rotation to maintain continuous movement
+        targetBodyRotation = totalRotation;
         float targetHeadRotation = Mathf.Clamp(
             Vector3.SignedAngle(Vector3.forward, targetDirection, Vector3.right),
             -maxHeadAngle,
@@ -112,40 +129,44 @@ public class TurretBehavior : MonoBehaviour
             Time.deltaTime * rotationSpeed
         );
 
-        bodyTransform.localRotation = Quaternion.Euler(0, 0, currentBodyRotation);
-        headTransform.localRotation = Quaternion.Euler(currentHeadRotation, 0, 0);
 
-      
+        Vector3 currentRotation = bodyTransform.localEulerAngles;
+        currentRotation.z = currentBodyRotation + (-uprotation);
+        bodyTransform.localEulerAngles = currentRotation;
+        headTransform.localRotation = Quaternion.Euler(currentHeadRotation - uprotation, 0, 0);
+
+
         if (rayOriginTransform != null && playerTransform != null)
         {
             float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
             if (distanceToPlayer <= laserDistance)
             {
-                Vector3 rayDirection = (playerTransform.position - rayOriginTransform.position).normalized;
+              
+               
                 Vector3 rayStart = rayOriginTransform.position;
                 Vector3 rayEnd = rayStart + rayDirection * rayDistance;
 
-             
+
                 bool hit = Physics.Raycast(rayStart, rayDirection, out raycastHitInfo, rayDistance, raycastLayerMask);
                 if (hit)
                 {
                     rayEnd = raycastHitInfo.point;
 
-                    
+
                 }
 
                 if (lineRenderer != null)
                 {
                     lineRenderer.enabled = true;
                     lineRenderer.positionCount = 2;
-                    
+
                     if (currentLaserEnd == Vector3.zero)
-                        currentLaserEnd = rayStart; 
+                        currentLaserEnd = rayStart;
                     currentLaserEnd = Vector3.Lerp(currentLaserEnd, rayEnd, Time.deltaTime * laserLerpSpeed);
                     lineRenderer.SetPosition(0, rayStart);
                     lineRenderer.SetPosition(1, currentLaserEnd);
 
-                   
+
                     if (damageSphere != null)
                     {
                         damageSphere.transform.position = currentLaserEnd;
@@ -163,7 +184,7 @@ public class TurretBehavior : MonoBehaviour
                 {
                     damageSphere.SetActive(false);
                 }
-                currentLaserEnd = Vector3.zero; 
+                currentLaserEnd = Vector3.zero;
             }
         }
     }

@@ -1391,6 +1391,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 187797344672996941, guid: e7fad52d9bf2ec64a918cc208466304e, type: 3}
+      propertyPath: rayDistance
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 187797344672996941, guid: e7fad52d9bf2ec64a918cc208466304e, type: 3}
       propertyPath: defaultColor.a
       value: 1
       objectReference: {fileID: 0}
@@ -1448,7 +1452,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1693577396412440340, guid: e7fad52d9bf2ec64a918cc208466304e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -13.5
+      value: -31.3
       objectReference: {fileID: 0}
     - target: {fileID: 2770758734360587928, guid: e7fad52d9bf2ec64a918cc208466304e, type: 3}
       propertyPath: m_Name

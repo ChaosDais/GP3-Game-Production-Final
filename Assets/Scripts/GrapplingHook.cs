@@ -20,7 +20,7 @@ public class GrapplingHook : MonoBehaviour
     public Transform gunTip, camera, player; // guntip will be the gun tip of grappling gun
 
 
-    private float maxDistance = 100f; //how far grapple can shot
+    private float maxDistance = 350f; //how far grapple can shot
     private SpringJoint joint; //launch variable
     private Rigidbody rb;
     public float stopDistance = 1f; //how close player needs to be before stopping theg grappling function
@@ -59,8 +59,7 @@ public class GrapplingHook : MonoBehaviour
     }
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+       
         rb = player.GetComponent<Rigidbody>();
         lr.startWidth = 0.02f;
         lr.endWidth = 0.02f;

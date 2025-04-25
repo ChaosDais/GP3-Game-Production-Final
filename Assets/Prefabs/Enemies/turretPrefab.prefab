@@ -369,10 +369,11 @@ MonoBehaviour:
   laserDistance: 30
   laserDamage: 10
   damageInterval: 3
-  laserLerpSpeed: 10
+  laserLerpSpeed: 3
   lineRenderer: {fileID: 8672942915240415825}
   damageSphere: {fileID: 0}
   sphereRadius: 0.5
+  uprotation: 60
 --- !u!120 &8672942915240415825
 LineRenderer:
   serializedVersion: 2
@@ -425,8 +426,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0
+        time: 0.0021781921
+        value: 0.20475769
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -512,7 +513,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad88cf97d6014dd42a44da4983d37bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turret: {fileID: 0}
   turretDamage: 10
+  laserDamage: 10
+  damageInterval: 3
 --- !u!1 &7039767014625934794
 GameObject:
   m_ObjectHideFlags: 0
