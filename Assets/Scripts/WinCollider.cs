@@ -26,7 +26,7 @@ public class WinCollider : MonoBehaviour
                 GameManagers.Instance.playerData.tomesCollected.Add(tomeID);
                 GameManagers.Instance.SaveGame();
             }
-
+            Debug.Log("Seendingplayer back");
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             SceneManager.LoadScene("PlayerHUB");

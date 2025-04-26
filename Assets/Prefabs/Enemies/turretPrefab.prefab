@@ -369,7 +369,7 @@ MonoBehaviour:
   laserDistance: 30
   laserDamage: 10
   damageInterval: 3
-  laserLerpSpeed: 3
+  laserLerpSpeed: 5
   lineRenderer: {fileID: 8672942915240415825}
   damageSphere: {fileID: 0}
   sphereRadius: 0.5
