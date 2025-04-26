@@ -19,6 +19,7 @@ public class FlyingEnemyBehavior : DamageableCharacter
     public GameObject projectilePrefab;
     public float shootingInterval = 3f;
     private float shootingTimer;
+    public Transform projectileSpawnPoint;
 
     // Melee attack fields
     private float meleeAttackTimer = 0f;
@@ -26,6 +27,11 @@ public class FlyingEnemyBehavior : DamageableCharacter
     private float meleeAttackRange = 3f;
     private float meleeDamageRadius = 6f;
     private bool hasDealtMeleeDamage = false;
+    private bool hasExploded = false;
+    private bool isRushing = false;
+    private Vector3 lockedTargetPosition;
+    public int blowupDam = 5;
+
     GhostStep visibility;
     private Transform player;
     private bool playerInRange;
@@ -37,17 +43,22 @@ public class FlyingEnemyBehavior : DamageableCharacter
         randomTarget = GetRandomWanderPoint();
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         shootingTimer = shootingInterval;
-        visibility = player.GetComponent<GhostStep>();
+
+        if (player != null)
+        {
+            visibility = player.GetComponent<GhostStep>();
+        }
     }
 
     void Update()
     {
-        if (player == null) return;
+        if (player == null || hasExploded) return;
 
-        // Vector math detection
+        // Check player detection
         float distToPlayer = Vector3.Distance(transform.position, player.position);
-        playerInRange = distToPlayer <= detectionRadius && !visibility.hidden;
+        playerInRange = distToPlayer <= detectionRadius && (visibility == null || !visibility.hidden);
 
+        // Maintain flying height
         Vector3 targetPosition = transform.position;
         targetPosition.y = flyingHeight;
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 5f);
@@ -67,35 +78,38 @@ public class FlyingEnemyBehavior : DamageableCharacter
             }
             else // Melee logic
             {
-                float dist = Vector3.Distance(transform.position, player.position);
-                if (dist > meleeAttackRange)
+                if (!isRushing)
                 {
-                    // Rush toward player only if not in range
-                    Vector3 rushDir = (player.position - transform.position);
-                    rushDir.y = 0;
-                    if (rushDir.magnitude > 0.1f)
-                    {
-                        rushDir = rushDir.normalized;
-                        transform.position += rushDir * (wanderSpeed * 10f) * Time.deltaTime; // Move faster when rushing
-                    }
+                    // Lock player position and begin rush
+                    lockedTargetPosition = player.position;
+                    lockedTargetPosition.y = transform.position.y; // stay level
+                    isRushing = true;
                     meleeAttackTimer = 0f;
                     hasDealtMeleeDamage = false;
                 }
+
+                // Move toward the locked target position
+                if (Vector3.Distance(transform.position, lockedTargetPosition) > 0.5f)
+                {
+                    Vector3 rushDir = (lockedTargetPosition - transform.position).normalized;
+                    transform.position += rushDir * (wanderSpeed * 10f) * Time.deltaTime;
+                }
                 else
                 {
-                    // Stop moving and start the explosion timer
+                    // At target, begin countdown to explode
                     meleeAttackTimer += Time.deltaTime;
                     if (meleeAttackTimer >= meleeAttackDelay && !hasDealtMeleeDamage)
                     {
                         DealMeleeDamage();
                         hasDealtMeleeDamage = true;
+                        hasExploded = true;
                     }
                 }
             }
         }
-        else
+        else if (!isRanged && !isRushing)
         {
-            // Wander randomly
+            // Wandering logic (only when not chasing)
             if (Vector3.Distance(transform.position, randomTarget) < wanderThreshold)
             {
                 randomTarget = GetRandomWanderPoint();
@@ -116,7 +130,10 @@ public class FlyingEnemyBehavior : DamageableCharacter
         if (projectilePrefab != null && player != null)
         {
             Vector3 direction = (player.position - transform.position).normalized;
-            GameObject projectile = Instantiate(projectilePrefab, transform.position + direction, Quaternion.LookRotation(direction));
+            Vector3 spawnPos = projectileSpawnPoint != null ? projectileSpawnPoint.position : transform.position + direction;
+            spawnPos.y += 1.2f;
+
+            GameObject projectile = Instantiate(projectilePrefab, spawnPos, Quaternion.LookRotation(direction));
 
             if (projectile.TryGetComponent<Rigidbody>(out Rigidbody rb))
             {
@@ -124,7 +141,6 @@ public class FlyingEnemyBehavior : DamageableCharacter
             }
         }
     }
-
 
     private Vector3 GetRandomWanderPoint()
     {
@@ -142,12 +158,11 @@ public class FlyingEnemyBehavior : DamageableCharacter
             DamageableCharacter playerHealth = hitCollider.gameObject.GetComponent<DamageableCharacter>();
             if (playerHealth != null && hitCollider.gameObject.CompareTag("Player"))
             {
-                // Deal damage to player
-                playerHealth.OnHit(5); //
+                playerHealth.OnHit(blowupDam); // Adjust damage as needed
             }
         }
 
-        // Destroy this enemy after dealing damage
-        Destroy(gameObject);
+
+        Destroy(gameObject); // Self-destruct
     }
 }
