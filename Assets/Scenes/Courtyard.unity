@@ -22704,6 +22704,10 @@ PrefabInstance:
       propertyPath: fireCooldown
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1060363731126910399, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
+      propertyPath: cooldownMeter
+      value: 
+      objectReference: {fileID: 1699890338}
     - target: {fileID: 1837331172910982567, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
       propertyPath: camera
       value: 
@@ -22780,6 +22784,14 @@ PrefabInstance:
       propertyPath: freeSpeed.movementSmooth
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6102137553500737607, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
+      propertyPath: cooldownMeter
+      value: 
+      objectReference: {fileID: 1699890338}
+    - target: {fileID: 7595166334660786437, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
+      propertyPath: cooldownMeter
+      value: 
+      objectReference: {fileID: 1699890338}
     - target: {fileID: 7656936612636347209, guid: 78aa776a1c2a67047912baba79a947e6, type: 3}
       propertyPath: camera
       value: 
@@ -23219,6 +23231,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1731209172cab614fb55e482029c0443, type: 3}
+--- !u!1 &1699890338 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5718519682206797533, guid: 1731209172cab614fb55e482029c0443, type: 3}
+  m_PrefabInstance: {fileID: 1699890337}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1711541590
 PrefabInstance:
   m_ObjectHideFlags: 0
