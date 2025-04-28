@@ -5,6 +5,7 @@ public class LoadWin : MonoBehaviour
 {
     
     public string[] requiredTomes = { "Courtyard", "Vault" };
+    public GameObject childObject;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -30,6 +31,7 @@ public class LoadWin : MonoBehaviour
 
         if (hasAllTomes)
         {
+            childObject.SetActive(true);
             SceneManager.LoadScene("WinScreen");
         }
     }
