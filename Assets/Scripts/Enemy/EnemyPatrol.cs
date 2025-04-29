@@ -1,3 +1,4 @@
+using Invector.vCharacterController;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,7 +15,7 @@ public class EnemyPatrol : DamageableCharacter
     private bool isInRange = false; // Track if player is in detection range
     private Animator animator;
     Transform player;
-    GhostStep visibility;
+    vThirdPersonController playerController;
 
     public override void Start()
     {
@@ -23,7 +24,7 @@ public class EnemyPatrol : DamageableCharacter
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        visibility = player.GetComponent<GhostStep>();
+        playerController = player.GetComponent<vThirdPersonController>();
         PatrolNextPoint();
     }
 
@@ -47,7 +48,7 @@ public class EnemyPatrol : DamageableCharacter
         float distanceToPlayer = Vector3.Distance(player.position, transform.position);
         bool wasInRange = isInRange;
         
-        isInRange = distanceToPlayer <= chaseRadius && !visibility.hidden;
+        isInRange = distanceToPlayer <= chaseRadius && !playerController.hidden;
 
         if (isInRange)
         {

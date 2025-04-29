@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Invector.vCharacterController;
 using UnityEngine;
 
 public class FlyingEnemyBehavior : DamageableCharacter
@@ -32,8 +33,8 @@ public class FlyingEnemyBehavior : DamageableCharacter
     private Vector3 lockedTargetPosition;
     public int blowupDam = 5;
 
-    GhostStep visibility;
     private Transform player;
+    vThirdPersonController playerController;
     private bool playerInRange;
 
     public override void Start()
@@ -41,12 +42,13 @@ public class FlyingEnemyBehavior : DamageableCharacter
         base.Start();
 
         randomTarget = GetRandomWanderPoint();
-        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        
         shootingTimer = shootingInterval;
 
         if (player != null)
         {
-            visibility = player.GetComponent<GhostStep>();
+            playerController = player.GetComponent<vThirdPersonController>();
         }
     }
 
@@ -56,7 +58,7 @@ public class FlyingEnemyBehavior : DamageableCharacter
 
         // Check player detection
         float distToPlayer = Vector3.Distance(transform.position, player.position);
-        playerInRange = distToPlayer <= detectionRadius && (visibility == null || !visibility.hidden);
+        playerInRange = distToPlayer <= detectionRadius && (!playerController.hidden);
 
         // Maintain flying height
         Vector3 targetPosition = transform.position;

@@ -14,14 +14,15 @@ public class GhostStep : MonoBehaviour
     public float duration = 5f;
 
     bool usable = true;
-    [HideInInspector] public bool hidden = false;
     bool onCD = false;
+    vThirdPersonController player;
     vThirdPersonInput input;
     Slider cooldownSlider;
     float cdCurrent;
 
     void Start()
     {
+        player = gameObject.GetComponent<vThirdPersonController>();
         input = gameObject.GetComponent<vThirdPersonInput>();
         cooldownSlider = cooldownMeter.GetComponent<Slider>();
         cdCurrent = cooldownSlider.value;
@@ -47,13 +48,13 @@ public class GhostStep : MonoBehaviour
     IEnumerator Hide()
     {
         if(activateSound != null) activateSound.Play();
-        hidden = true;
+        player.hidden = true;
         usable = false;
 
         yield return new WaitForSeconds(duration);
 
         if(deactivateSound != null) deactivateSound.Play();
-        hidden = false;
+        player.hidden = false;
         onCD = true;
         cdCurrent = 0;
 

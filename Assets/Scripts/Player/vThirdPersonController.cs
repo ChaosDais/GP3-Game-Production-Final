@@ -4,6 +4,7 @@ namespace Invector.vCharacterController
 {
     public class vThirdPersonController : vThirdPersonAnimator
     {
+        [HideInInspector] public bool hidden = false;
         public virtual void ControlAnimatorRootMotion()
         {
             if (!this.enabled) return;
