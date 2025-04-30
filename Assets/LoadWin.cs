@@ -32,7 +32,7 @@ public class LoadWin : MonoBehaviour
         if (hasAllTomes)
         {
             childObject.SetActive(true);
-            SceneManager.LoadScene("WinScreen");
+            SceneManager.LoadScene("ClosingCutscene");
         }
     }
 }
