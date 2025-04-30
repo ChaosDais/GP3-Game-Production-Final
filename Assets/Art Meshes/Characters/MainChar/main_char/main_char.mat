@@ -36,8 +36,12 @@ Material:
     m_Ints: []
     m_Floats:
     - _AORemapMax: 0.35744324
+    - _MetallicRemapMax: 1
     - _SmoothnessRemapMax: 0.5256518
-    m_Colors: []
+    m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2462603442499558026
 MonoBehaviour:
