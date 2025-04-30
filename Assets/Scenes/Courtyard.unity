@@ -27336,8 +27336,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2599162860229694223, guid: 27c3ee6de025d314fbef0676dbfc35de, type: 3}
+      propertyPath: m_Volume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2599162860229694223, guid: 27c3ee6de025d314fbef0676dbfc35de, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3829601060146710199, guid: 27c3ee6de025d314fbef0676dbfc35de, type: 3}
       propertyPath: m_AllowMSAA
