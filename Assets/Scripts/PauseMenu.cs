@@ -16,6 +16,9 @@ public class PauseMenu : MonoBehaviour
         {
             pauseMenuUI.SetActive(false);
         }
+
+        // Ensure the cursor is locked and hidden when the game starts
+        SetMouseActive(false);
     }
 
     void Update()
@@ -48,6 +51,9 @@ public class PauseMenu : MonoBehaviour
 
         // Update the pause state
         isPaused = false;
+
+        // Lock and hide the cursor when resuming the game
+        SetMouseActive(false);
     }
 
     private void Pause()
@@ -64,5 +70,15 @@ public class PauseMenu : MonoBehaviour
 
         // Update the pause state
         isPaused = true;
+
+        // Unlock and show the cursor when the game is paused
+        SetMouseActive(true);
+    }
+
+    // Helper method to set the mouse active or inactive
+    private void SetMouseActive(bool isActive)
+    {
+        Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = isActive;
     }
 }

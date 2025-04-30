@@ -38,6 +38,7 @@ namespace Invector.vCharacterController
         bool sprintHeld;
         bool strafePressed;
         bool attackPressed;
+        bool abilityPressed;
 
         #endregion
 
@@ -73,7 +74,7 @@ namespace Invector.vCharacterController
             inputActions.Player.Attack.performed += ctx => attackPressed = true;
             inputActions.Player.Sprint.performed += ctx => cc.Sprint(true);
             inputActions.Player.Sprint.canceled += ctx => cc.Sprint(false);
-            
+            inputActions.Player.Crouch.performed += ctx => abilityPressed = true;
         }
         void OnDisable()
         {
@@ -120,6 +121,10 @@ namespace Invector.vCharacterController
             {
                 StrafeInput();
                 strafePressed = false;
+            }
+            if (abilityPressed)
+            {
+                abilityPressed = false;
             }
 
             // Common input handling
